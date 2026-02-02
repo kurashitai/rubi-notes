@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "version": "2.0",
+    "lastUpdated": "2026-02-02",
+    "server": "Rubinot",
+    "client": "13.30 Retro-PVP",
+    "vocation": "Elite Knight",
+    "weaponType": "Club",
+    "playStyle": "Solo",
+    "levelRange": "20-500"
+  },
+  "weapons": {
+    "level_8_50": [
+      {"name": "Morning Star", "level": 0, "attack": 25, "slots": 0, "type": "1-hand", "element": "Physical"},
+      {"name": "Life Preserver", "level": 15, "attack": 26, "slots": 0, "type": "1-hand", "element": "Physical"},
+      {"name": "Furry Club", "level": 20, "attack": 31, "slots": 0, "type": "1-hand", "element": "Physical"},
+      {"name": "Diamond Sceptre", "level": 25, "attack": 34, "slots": 0, "type": "1-hand", "element": "Physical"},
+      {"name": "Brutetamer's Staff", "level": 25, "attack": 37, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Sapphire Hammer", "level": 30, "attack": 35, "slots": 0, "type": "1-hand", "element": "Physical"},
+      {"name": "Spiked Squelcher", "level": 30, "attack": 41, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Shadow Sceptre", "level": 35, "attack": 36, "slots": 0, "type": "1-hand", "element": "Physical"},
+      {"name": "Orcish Maul", "level": 35, "attack": 42, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Amber Staff", "level": 40, "attack": 43, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Deepling Squelcher", "level": 48, "attack": 44, "slots": 2, "type": "1-hand", "element": "Physical", "recommended": true}
+    ],
+    "level_50_100": [
+      {"name": "Moohtant Cudgel", "level": 60, "attack": 47, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Onyx Flail", "level": 65, "attack": 43, "slots": 1, "type": "1-hand", "element": "Physical"},
+      {"name": "Blessed Sceptre", "level": 75, "attack": 46, "slots": 2, "type": "1-hand", "element": "Physical"},
+      {"name": "Arcane Staff", "level": 75, "attack": 49, "slots": 2, "type": "2-hand", "element": "Physical"},
+      {"name": "Ornate Mace", "level": 90, "attack": 48, "slots": 2, "type": "1-hand", "element": "Physical", "recommended": true}
+    ],
+    "level_100_200": [
+      {"name": "Mycological Mace", "level": 120, "attack": 50, "slots": 2, "type": "1-hand", "element": "Physical"},
+      {"name": "Umbral Hammer", "level": 120, "attack": 51, "slots": 2, "type": "2-hand", "element": "Physical"},
+      {"name": "Maimer", "level": 150, "attack": 51, "slots": 2, "type": "1-hand", "element": "Physical", "recommended": true},
+      {"name": "Jungle Flail", "level": 150, "attack": 52, "slots": 3, "type": "2-hand", "element": "Physical"}
+    ],
+    "level_200_300": [
+      {"name": "Mace of Destruction", "level": 200, "attack": 52, "slots": 3, "type": "1-hand", "element": "Physical", "recommended": true},
+      {"name": "Hammer of Destruction", "level": 200, "attack": 54, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Cobra Club", "level": 220, "attack": 52, "slots": 2, "type": "1-hand", "element": "Fire", "elementBonus": 5},
+      {"name": "Mortal Mace", "level": 220, "attack": 52, "slots": 2, "type": "1-hand", "element": "Death", "elementBonus": 5},
+      {"name": "Resizer", "level": 230, "attack": 54, "slots": 2, "type": "2-hand", "element": "Ice", "elementBonus": 6},
+      {"name": "Master Umbral Hammer", "level": 250, "attack": 53, "slots": 3, "type": "2-hand", "element": "Physical"},
+      {"name": "Lion Hammer", "level": 270, "attack": 53, "slots": 2, "type": "1-hand", "element": "Earth", "elementBonus": 5},
+      {"name": "Eldritch Warmace", "level": 270, "attack": 55, "slots": 2, "type": "2-hand", "element": "Fire", "elementBonus": 6}
+    ],
+    "level_300_500": [
+      {"name": "Falcon Mace", "level": 300, "attack": 54, "slots": 2, "type": "1-hand", "element": "Energy", "elementBonus": 6, "recommended": true},
+      {"name": "Soulcrusher", "level": 400, "attack": 55, "slots": 2, "type": "1-hand", "element": "Ice", "elementBonus": 7, "recommended": true},
+      {"name": "Soulmaimer", "level": 400, "attack": 56, "slots": 3, "type": "2-hand", "element": "Energy", "elementBonus": 7}
+    ]
+  },
+  "equipment": {
+    "helmet": [
+      {"name": "Zaoan Helmet", "level": 0, "defense": 9, "slots": 1, "bonus": "Physical +5%", "recommended": true},
+      {"name": "Demon Helmet", "level": 0, "defense": 10, "slots": 2, "bonus": null}
+    ],
+    "armor": [
+      {"name": "Magic Plate Armor", "level": 0, "defense": 17, "slots": 2, "bonus": null, "recommended": true}
+    ],
+    "legs": [
+      {"name": "Dwarven Legs", "level": 0, "defense": 7, "slots": 0, "bonus": "Physical +3%", "recommended": true},
+      {"name": "Zaoan Legs", "level": 0, "defense": 8, "slots": 0, "bonus": "Physical +2%"}
+    ],
+    "boots": [
+      {"name": "Pair of Soft Boots", "level": 0, "defense": 0, "slots": 0, "bonus": "Fast Regeneration", "recommended": true},
+      {"name": "Boots of Haste", "level": 0, "defense": 0, "slots": 1, "bonus": "Speed +20"}
+    ],
+    "shield": [
+      {"name": "Mastermind Shield", "level": 0, "defense": 37, "slots": 1, "bonus": null, "recommended": true},
+      {"name": "Carapace Shield", "level": 0, "defense": 36, "slots": 1, "bonus": null}
+    ],
+    "amulet": [
+      {"name": "Enchanted Werewolf Amulet", "level": 0, "defense": 3, "bonus": "Physical +6%", "recommended": true},
+      {"name": "Platinum Amulet", "level": 0, "defense": 2, "bonus": null}
+    ],
+    "ring": [
+      {"name": "Club Ring", "level": 0, "defense": 0, "bonus": "Club Skill +4", "recommended": true}
+    ]
+  },
+  "imbuements": {
+    "elemental": [
+      {"name": "Scorch", "element": "Fire", "basic": 10, "intricate": 25, "powerful": 50, "useAgainst": ["Ice", "Physical"]},
+      {"name": "Venom", "element": "Earth", "basic": 10, "intricate": 25, "powerful": 50, "useAgainst": ["Ice", "Physical"]},
+      {"name": "Frost", "element": "Ice", "basic": 10, "intricate": 25, "powerful": 50, "useAgainst": ["Fire", "Physical"]},
+      {"name": "Electrify", "element": "Energy", "basic": 10, "intricate": 25, "powerful": 50, "useAgainst": ["Earth", "Physical"]}
+    ],
+    "leech": [
+      {"name": "Vampirism", "type": "Life Leech", "basic": 5, "intricate": 10, "powerful": 25, "priority": 1},
+      {"name": "Void", "type": "Mana Leech", "basic": 3, "intricate": 5, "powerful": 8, "priority": 2}
+    ],
+    "critical": [
+      {"name": "Strike", "basic": {"chance": 5, "damage": 5}, "intricate": {"chance": 5, "damage": 15}, "powerful": {"chance": 5, "damage": 40}, "priority": 3}
+    ],
+    "protection": [
+      {"name": "Snake Skin", "element": "Earth", "basic": 3, "intricate": 8, "powerful": 15},
+      {"name": "Dragon Hide", "element": "Fire", "basic": 3, "intricate": 8, "powerful": 15},
+      {"name": "Quara Scale", "element": "Ice", "basic": 3, "intricate": 8, "powerful": 15},
+      {"name": "Cloud Fabric", "element": "Energy", "basic": 3, "intricate": 8, "powerful": 15},
+      {"name": "Demon Presence", "element": "Holy", "basic": 3, "intricate": 8, "powerful": 15},
+      {"name": "Lich Shroud", "element": "Death", "basic": 2, "intricate": 5, "powerful": 10}
+    ]
+  },
+  "hunts": [
+    {
+      "name": "Stonerefiner",
+      "levelRange": "0-100",
+      "location": "Unknown",
+      "monsters": ["Stonerefiner"],
+      "weaknesses": {"Physical": 120, "Ice": 120, "Fire": 110, "Earth": 80},
+      "expPerHour": "500k",
+      "profitPerHour": "Medium",
+      "recommendedImbuement": "Frost",
+      "strategy": "Exori series, Utura for heal",
+      "access": "None"
+    },
+    {
+      "name": "Shaburak Demon",
+      "levelRange": "100-200",
+      "location": "Goroma (Cult Cave)",
+      "monsters": ["Shaburak Demon"],
+      "weaknesses": {"Ice": 110, "Earth": 90},
+      "expPerHour": "600k",
+      "profitPerHour": "Variable",
+      "recommendedImbuement": "Frost",
+      "strategy": "Cuidado com waves de fogo",
+      "access": "None"
+    },
+    {
+      "name": "Exotic Cave",
+      "levelRange": "100-200",
+      "location": "Issavi",
+      "monsters": ["Various"],
+      "weaknesses": {},
+      "expPerHour": "800k",
+      "profitPerHour": "Good",
+      "recommendedImbuement": "Variable",
+      "strategy": "Vários tipos de criaturas",
+      "access": "A Pirate's Tail Quest (1500 reputation)"
+    },
+    {
+      "name": "Hero Cave",
+      "levelRange": "100-200",
+      "location": "Edron",
+      "monsters": ["Heroes", "Vile Grandmasters"],
+      "weaknesses": {"Physical": 100},
+      "expPerHour": "700k",
+      "profitPerHour": "Good",
+      "recommendedImbuement": "Physical/Frost",
+      "strategy": "Classic hunt, good for beginners",
+      "access": "None"
+    },
+    {
+      "name": "Grim Reaper",
+      "levelRange": "100-200",
+      "location": "Yalahar (Cemetery Quarter), Drefia",
+      "monsters": ["Grim Reaper"],
+      "weaknesses": {"Holy": 125, "Fire": 110, "Physical": 100},
+      "immunities": ["Death", "Ice"],
+      "expPerHour": "1kk",
+      "profitPerHour": "Good",
+      "recommendedImbuement": "Scorch",
+      "strategy": "Cuidado com waves! Use Wound Cleansing",
+      "access": "None"
+    },
+    {
+      "name": "Draken Walls",
+      "levelRange": "200-300",
+      "location": "Zao - Razachai",
+      "monsters": ["Draken Warmaster", "Draken Spellweaver", "Draken Elite"],
+      "weaknesses": {"Physical": 100, "Earth": 100},
+      "expPerHour": "1.5kk",
+      "profitPerHour": "Good",
+      "recommendedImbuement": "Venom",
+      "strategy": "Lure 8+ Drakens, cuidado com Draken Elite",
+      "access": "Wrath of the Emperor Quest"
+    },
+    {
+      "name": "Banuta - Last Floor",
+      "levelRange": "200-300",
+      "location": "Banuta",
+      "monsters": ["Merlkin", "Sibang", "Apes"],
+      "weaknesses": {},
+      "expPerHour": "1.2kk",
+      "profitPerHour": "Medium",
+      "recommendedImbuement": "Scorch/Frost",
+      "strategy": "Exori series, area farming",
+      "access": "Ape City Quest"
+    },
+    {
+      "name": "Oramond West",
+      "levelRange": "300-400",
+      "location": "Rathleton - Western Plains",
+      "monsters": [
+        {"name": "Glooth Blob", "exp": 700, "hp": 750},
+        {"name": "Rot Elemental", "exp": 750, "hp": 850},
+        {"name": "Blood Beast", "exp": 1000, "hp": 1600},
+        {"name": "Devourer", "exp": 1755, "hp": 1900}
+      ],
+      "weaknesses": {"Ice": 110},
+      "expPerHour": "2kk",
+      "profitPerHour": "Waste (ignore loot for max exp)",
+      "recommendedImbuement": "Frost",
+      "strategy": "Focus on exp, ignore loot. Quara Scouts raid increases exp!",
+      "access": "Via Rathleton"
+    },
+    {
+      "name": "Burster Spectres",
+      "levelRange": "300-400",
+      "location": "Darashia (Haunted Nexus Tomb)",
+      "monsters": ["Burster Spectre"],
+      "weaknesses": {},
+      "expPerHour": "4.4-5.8kk",
+      "profitPerHour": "400-600k",
+      "recommendedImbuement": "Physical/Fire protection",
+      "strategy": "Single prey with experience",
+      "access": "None"
+    },
+    {
+      "name": "Weretigers - Oskayaat",
+      "levelRange": "400-500",
+      "location": "Oskayaat",
+      "monsters": [
+        {"name": "Cunning Werepanther", "weaknesses": {"Fire": -20, "Energy": -20, "Ice": -10, "Earth": 10, "Holy": 15, "Death": 25}},
+        {"name": "Weretiger", "weaknesses": {"Fire": -30, "Energy": -25, "Ice": -10, "Earth": 5, "Holy": 15, "Death": 25}},
+        {"name": "White Weretiger", "weaknesses": {"Fire": -60, "Energy": -40, "Ice": -25, "Earth": 5, "Holy": 15, "Death": 20}}
+      ],
+      "expPerHour": "5.1kk+",
+      "profitPerHour": "900k+",
+      "recommendedImbuement": "Death/Holy, Fire protection",
+      "strategy": "Cuidado! Weretigers são muito fortes",
+      "access": "Paradise Lost Quest"
+    },
+    {
+      "name": "Winter Court",
+      "levelRange": "400-500",
+      "location": "Feyrist",
+      "monsters": ["Winter Elves"],
+      "weaknesses": {"Fire": 15, "Energy": 15},
+      "expPerHour": "3.5kk",
+      "profitPerHour": "Good",
+      "recommendedImbuement": "Scorch/Electrify",
+      "strategy": "Cuidado com Thanatursus e Arachnos",
+      "access": "Feyrist access"
+    },
+    {
+      "name": "Summer Court",
+      "levelRange": "400-500",
+      "location": "Feyrist",
+      "monsters": ["Summer Elves"],
+      "weaknesses": {"Ice": 30},
+      "expPerHour": "4.5kk",
+      "profitPerHour": "Good",
+      "recommendedImbuement": "Frost",
+      "strategy": "Melhor para Druids (Avalanche)",
+      "access": "Feyrist access"
+    }
+  ],
+  "quests": [
+    {
+      "name": "Wrath of the Emperor Quest",
+      "prerequisites": ["Children of the Revolution Quest", "Ape City Quest (last mission)"],
+      "unlocks": ["Draken Walls", "Zao Palace"],
+      "difficulty": "Medium-High"
+    },
+    {
+      "name": "A Pirate's Tail Quest",
+      "prerequisites": [],
+      "requirements": "1500 reputation points (Pirat Raids)",
+      "unlocks": ["Exotic Cave", "Pirat Mine"],
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Ape City Quest",
+      "prerequisites": [],
+      "unlocks": ["Banuta Last Floor"],
+      "difficulty": "Low-Medium"
+    },
+    {
+      "name": "Paradise Lost Quest",
+      "prerequisites": [],
+      "requirements": "Complete mosaics in caves",
+      "unlocks": ["Weretigers Cave"],
+      "difficulty": "High"
+    }
+  ]
+}
