@@ -1,3 +1,5 @@
+import { questsDatabaseExtra } from "./quests-extra";
+
 export interface QuestStep {
   title: string;
   description: string[];
@@ -21,6 +23,7 @@ export interface QuestData {
 }
 
 export const questsDatabase: Record<string, QuestData> = {
+  ...questsDatabaseExtra,
   "dream-courts": {
     slug: "dream-courts",
     name: "The Dream Courts",

@@ -10,7 +10,7 @@ export default function ToolsPage() {
   const [platinum, setPlatinum] = useState(0);
   const [crystal, setCrystal] = useState(0);
   const [marketLoot, setMarketLoot] = useState(0);
-  const [duration, setDuration] = useState(60); // minutes
+  const [duration, setDuration] = useState(60);
 
   // Party Split State
   const [partyBalance, setPartyBalance] = useState(0);
@@ -19,7 +19,10 @@ export default function ToolsPage() {
   // Exp State
   const [currentLevel, setCurrentLevel] = useState(100);
   const [targetLevel, setTargetLevel] = useState(101);
-  const [expPerHour, setExpPerHour] = useState(1000000); // 1kk/h
+  const [expPerHour, setExpPerHour] = useState(1000000);
+
+  // Character Search State
+  const [charName, setCharName] = useState("");
 
   // Profit Logic
   const totalLoot = gold + (platinum * 100) + (crystal * 10000) + marketLoot;
@@ -29,13 +32,20 @@ export default function ToolsPage() {
   // Party Logic
   const splitPerPlayer = partySize > 0 ? partyBalance / partySize : 0;
 
-  // Exp Logic (Tibia Formula)
-  // Exp for level L = (50/3)*(L^3 - 6*L^2 + 17*L - 12)
+  // Exp Logic
   const getExpForLevel = (lvl: number) => Math.floor((50 / 3) * (Math.pow(lvl, 3) - 6 * Math.pow(lvl, 2) + 17 * lvl - 12));
   const currentExpTotal = getExpForLevel(currentLevel);
   const targetExpTotal = getExpForLevel(targetLevel);
   const expNeeded = targetExpTotal - currentExpTotal;
-  const timeToLevel = expPerHour > 0 ? expNeeded / expPerHour : 0; // hours
+  const timeToLevel = expPerHour > 0 ? expNeeded / expPerHour : 0;
+
+  // Search Logic
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (charName.trim()) {
+      window.open(`https://rubinot.com.br/?subtopic=characters&name=${encodeURIComponent(charName)}`, '_blank');
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -43,8 +53,33 @@ export default function ToolsPage() {
         <Link href="/" className="text-purple-400 hover:text-purple-300 mb-4 inline-block">
           ← Voltar
         </Link>
-        <h1 className="text-3xl font-bold mb-2">🧮 Calculadoras</h1>
+        <h1 className="text-3xl font-bold mb-2">🧮 Calculadoras & Tools</h1>
         <p className="text-gray-500">Ferramentas úteis para otimizar sua gameplay.</p>
+      </div>
+
+      {/* Character Search Widget */}
+      <div className="card-glow p-6 bg-[#1e1e2e] mb-8 border border-purple-500/20">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+          <span>🔍</span> Character Search (Rubinot)
+        </h2>
+        <form onSubmit={handleSearch} className="flex gap-4">
+          <input
+            type="text"
+            value={charName}
+            onChange={(e) => setCharName(e.target.value)}
+            placeholder="Nome do personagem..."
+            className="flex-1 bg-[#14141f] border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-purple-500 outline-none transition-colors"
+          />
+          <button 
+            type="submit"
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold transition-colors shadow-lg shadow-purple-900/20"
+          >
+            Buscar
+          </button>
+        </form>
+        <p className="text-xs text-gray-500 mt-2 ml-1">
+          Redireciona para a página oficial do personagem no Rubinot.
+        </p>
       </div>
 
       <div className="grid gap-8">
@@ -204,7 +239,7 @@ export default function ToolsPage() {
               </div>
 
               <div className="p-3 bg-blue-900/10 border border-blue-900/30 rounded text-xs text-blue-300">
-                💡 Baseado na fórmula oficial do Tibia. Rates do servidor Rubinot (se houver stages) podem afetar a exp/h real, mas a quantidade necessária é a mesma.
+                💡 Baseado na fórmula oficial do Tibia.
               </div>
             </div>
           </div>
@@ -246,10 +281,6 @@ export default function ToolsPage() {
               </span>
             </div>
           </div>
-          
-          <p className="text-xs text-gray-500 mt-4">
-            * Insira o "Balance" final do analyzer da party (Loot - Supplies). O valor acima é o lucro líquido para cada jogador.
-          </p>
         </div>
 
       </div>
