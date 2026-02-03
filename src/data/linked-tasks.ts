@@ -27,7 +27,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "10.000 Gold Coins" },
       { type: "repeatable", description: "4.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "goblins-edron"
   },
   {
     id: "#2",
@@ -40,7 +41,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "10.000 Gold Coins" },
       { type: "repeatable", description: "5.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "trolls-edron"
   },
   {
     id: "#3",
@@ -53,7 +55,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "20.000 Gold Coins" },
       { type: "repeatable", description: "10.000 Gold Coins" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "rotworms-liberty-bay"
   },
   {
     id: "#4",
@@ -65,7 +68,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "15.000 EXP x Rate" },
       { type: "repeatable", description: "11.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "minotaurs-yalahar"
   },
   {
     id: "#5",
@@ -77,7 +81,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Exercise Weapon (3.600 Charges)" },
       { type: "repeatable", description: "13.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "dwarves-kazordoon"
   },
   {
     id: "#6",
@@ -102,7 +107,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "40.000 Gold Coins" },
       { type: "repeatable", description: "17.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "elves-yalahar"
   },
   {
     id: "#8",
@@ -115,7 +121,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "50.000 Gold Coins" },
       { type: "repeatable", description: "20.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "dark-cathedral"
   },
   {
     id: "#9",
@@ -127,7 +134,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "5x Prey Cards" },
       { type: "repeatable", description: "30.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "tombs-ankrahmun"
   },
   {
     id: "#10",
@@ -140,7 +148,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "50.000 Gold Coins" },
       { type: "repeatable", description: "22.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "ancient-scarabs"
   },
   {
     id: "#11",
@@ -153,7 +162,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "60.000 Gold Coins" },
       { type: "repeatable", description: "25.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "cyclops-mistrock"
   },
   {
     id: "#12",
@@ -165,7 +175,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "50.000 EXP x Rate" },
       { type: "repeatable", description: "40.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "mutated-humans"
   },
   {
     id: "#13",
@@ -178,7 +189,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "60.000 Gold Coins" },
       { type: "repeatable", description: "50.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "coryms-venore"
   },
   {
     id: "#14",
@@ -190,7 +202,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "100.000 Gold Coins" },
       { type: "repeatable", description: "70.000 Gold Coins" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "banuta-surface"
   },
   {
     id: "#15",
@@ -202,7 +215,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Exercise Weapon (7.200 Charges)" },
       { type: "repeatable", description: "Random Item: Brutus Bloodbeard's Hat, The Lethal Lissy's Shirt, Ron The Ripper's Sabre, Deadeye Devious' Eye Patch" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "pirates-nargor"
   },
   {
     id: "#16",
@@ -216,7 +230,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "100.000 EXP x Rate" },
       { type: "repeatable", description: "1x Shard" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "barbarians-svargrond"
   },
   {
     id: "#17",
@@ -228,7 +243,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "250.000 EXP x Rate" },
       { type: "repeatable", description: "150.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "djinns-ankrahmun" // Precisa criar
   },
   {
     id: "#18",
@@ -241,7 +257,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "150.000 Gold Coins" },
       { type: "repeatable", description: "200.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "stonerefiner-venore" // Precisa criar
   },
   {
     id: "#19",
@@ -253,7 +270,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "400.000 EXP x Rate" },
       { type: "repeatable", description: "300.000 EXP x Rate" }
     ],
-    room: "Lothlorien"
+    room: "Lothlorien",
+    bestHuntSlug: "dragons-yalahar"
   },
   {
     id: "#20",
@@ -282,7 +300,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "200.000 Gold Coins" },
       { type: "repeatable", description: "700.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "quaras-yalahar" // Precisa criar
   },
   {
     id: "#22",
@@ -294,7 +313,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "5x Prey Cards" },
       { type: "repeatable", description: "200.000 Gold Coins" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "ancient-scarabs"
   },
   {
     id: "#23",
@@ -306,7 +326,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1.300.000 EXP x Rate" },
       { type: "repeatable", description: "1.000.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "giant-spiders-port-hope"
   },
   {
     id: "#24",
@@ -319,7 +340,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "300.000 Gold Coins" },
       { type: "repeatable", description: "1.200.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "wyrms-liberty-bay"
   },
   {
     id: "#25",
@@ -332,7 +354,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "500.000 Gold Coins" },
       { type: "repeatable", description: "1.500.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "cults-yalahar"
   },
   {
     id: "#26",
@@ -344,7 +367,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Zaoan Chess Box" },
       { type: "repeatable", description: "300.000 Gold Coins" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "deeplings-gray-island" // Precisa criar
   },
   {
     id: "#27",
@@ -370,7 +394,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Exercise Weapon (14.400 Charges)" },
       { type: "repeatable", description: "400.000 Gold Coins" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "minotaurs-thais-cult" // Precisa criar
   },
   {
     id: "#29",
@@ -383,7 +408,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "500.000 Gold Coins" },
       { type: "repeatable", description: "2.500.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "feyrist-nightmare" // Precisa criar
   },
   {
     id: "#30",
@@ -397,7 +423,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "7x Gold Token" },
       { type: "repeatable", description: "7x Silver Token" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "glooth-bandits"
   },
   {
     id: "#31",
@@ -409,7 +436,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Roulette Coin" },
       { type: "repeatable", description: "500.000 Gold Coins" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "exotic-cave" // Precisa criar
   },
   {
     id: "#32",
@@ -422,7 +450,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "500.000 Gold Coins" },
       { type: "repeatable", description: "3.000.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "pirates-nargor"
   },
   {
     id: "#33",
@@ -434,7 +463,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Mystic Bag" },
       { type: "repeatable", description: "3.500.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "werehyaenas-horestis" // Precisa criar
   },
   {
     id: "#34",
@@ -446,7 +476,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Dragon Claw" },
       { type: "repeatable", description: "600.000 Gold Coins" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "dragon-lords-fenrock"
   },
   {
     id: "#35",
@@ -458,7 +489,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "5.000.000 EXP x Rate" },
       { type: "repeatable", description: "4.000.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "frost-dragons-okolnir"
   },
   {
     id: "#36",
@@ -484,7 +516,7 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "1.000.000 Gold Coins" }
     ],
     room: "Executioner",
-    bestHuntSlug: "grim-reaper"
+    bestHuntSlug: "nightmares-krailos"
   },
   {
     id: "#38",
@@ -511,7 +543,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1.500.000 Gold Coins" },
       { type: "repeatable", description: "5.000.000 EXP x Rate" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "the-hive"
   },
   {
     id: "#40",
@@ -523,7 +556,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Mini Obelisk" },
       { type: "repeatable", description: "1.500.000 Gold Coins" }
     ],
-    room: "Executioner"
+    room: "Executioner",
+    bestHuntSlug: "mota-thais" // Precisa criar
   },
 
   // --- SALA 2: MORGUL'S ROOM (#41-#60) ---
@@ -538,7 +572,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Music Box" },
       { type: "repeatable", description: "15x Gold Tokens" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "iksupan"
   },
   {
     id: "#42",
@@ -551,7 +586,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "10x Prey Cards" },
       { type: "repeatable", description: "20x Silver Tokens" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "carnivors"
   },
   {
     id: "#43",
@@ -578,7 +614,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3.000.000 Gold Coins" },
       { type: "repeatable", description: "2.000.000 Gold Coins" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "candia-candy"
   },
   {
     id: "#45",
@@ -606,7 +643,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "2.000.000 Gold Coins" },
       { type: "repeatable", description: "7.000.000 EXP x Rate" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "nightmare-isle" // Local onde tem Breach Brood também
   },
   {
     id: "#47",
@@ -648,7 +686,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "15 Gold Tokens" },
       { type: "repeatable", description: "20 Silver Tokens" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "oramond-west" // Catacombs Oramond
   },
   {
     id: "#50",
@@ -675,7 +714,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "50x Major Crystalline Token" },
       { type: "repeatable", description: "20x Major Crystalline Token" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "warzone-456" // Usando 456 como referência por enquanto
   },
   {
     id: "#52",
@@ -702,7 +742,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "2x Roulette Coin" },
       { type: "repeatable", description: "10.000.000 EXP x Rate" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "weretigers" // Mesmo respawn Oskayaat
   },
   {
     id: "#54",
@@ -717,7 +758,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "10.000.000 EXP x Rate" },
       { type: "repeatable", description: "2.000.000 Gold Coins" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "asura-palace" // Placeholder
   },
   {
     id: "#55",
@@ -730,7 +772,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Exercise Weapon (25.200 Charges)" },
       { type: "repeatable", description: "3.000.000 Gold Coins" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "the-hive" // Gray Island area
   },
   {
     id: "#56",
@@ -746,7 +789,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Earth Amplification" },
       { type: "repeatable", description: "Random Item: Bestiary Betterment, Strike Enhancement, Stamina Extension" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "the-hive"
   },
   {
     id: "#57",
@@ -759,7 +803,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "Random Item: Red Tome, Purple Tome, Blue Tome, Green Tome, Grey Tome" },
       { type: "repeatable", description: "Random Item: Lemon Cupcake, Blueberry Cupcake, Strawberry Cupcake" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "issavi-sewers"
   },
   {
     id: "#58",
@@ -772,7 +817,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3x Mystic Bag" },
       { type: "repeatable", description: "4.000.000 Gold Coins" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "podzilla"
   },
   {
     id: "#59",
@@ -788,7 +834,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Bestiary Betterment" },
       { type: "repeatable", description: "3.000.000 Gold Coins" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "kilmaresh-catacombs"
   },
   {
     id: "#60",
@@ -801,7 +848,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "10.000.000 EXP x Rate" },
       { type: "repeatable", description: "8.000.000 EXP x Rate" }
     ],
-    room: "Morgul"
+    room: "Morgul",
+    bestHuntSlug: "kilmaresh-catacombs"
   },
 
   // --- SALA 3: CORRUPTED ROOM (#61-#78) ---
@@ -816,7 +864,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "12.000.000 EXP x Rate" },
       { type: "repeatable", description: "12.000.000 EXP x Rate" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "warzone-456"
   },
   {
     id: "#62",
@@ -829,7 +878,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Oberon Chest" },
       { type: "repeatable", description: "Random Item: Lemon Cupcake, Strawberry Cupcake, Blueberry Cupcake" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "falcon-bastion"
   },
   {
     id: "#63",
@@ -842,7 +892,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "15.000.000 EXP x Rate" },
       { type: "repeatable", description: "13.000.000 EXP x Rate" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "kilmaresh-catacombs"
   },
   {
     id: "#64",
@@ -855,7 +906,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "15x Prey Cards" },
       { type: "repeatable", description: "15.000.000 EXP x Rate" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "issavi-sewers"
   },
   {
     id: "#65",
@@ -868,7 +920,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "8.000.000 Gold Coins" },
       { type: "repeatable", description: "6.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "roshamuul-lower"
   },
   {
     id: "#66",
@@ -897,7 +950,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "12.000.000 EXP x Rate" },
       { type: "repeatable", description: "2.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "issavi-sewers"
   },
   {
     id: "#68",
@@ -910,7 +964,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Exercise Weapon (32.400 Charges)" },
       { type: "repeatable", description: "7.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "ferumbras-ascension"
   },
   {
     id: "#69",
@@ -923,7 +978,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "10.000.000 Gold Coins" },
       { type: "repeatable", description: "7.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "issavi-sewers"
   },
   {
     id: "#70",
@@ -938,7 +994,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "15.000.000 EXP x Rate" },
       { type: "repeatable", description: "3.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "gnomprona-monster"
   },
   {
     id: "#71",
@@ -951,7 +1008,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "2x Mini Obelisk" },
       { type: "repeatable", description: "1x Golden Prison Key" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "issavi-sewers"
   },
   {
     id: "#72",
@@ -965,7 +1023,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "5.000.000 Gold Coins" },
       { type: "repeatable", description: "8.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "kilmaresh-catacombs"
   },
   {
     id: "#73",
@@ -978,7 +1037,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3x Roulette Coin" },
       { type: "repeatable", description: "10.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "issavi-sewers"
   },
   {
     id: "#74",
@@ -992,7 +1052,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Boots Of Homecoming" },
       { type: "repeatable", description: "17.000.000 EXP x Rate" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "ferumbras-ascension"
   },
   {
     id: "#75",
@@ -1006,7 +1067,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "repeatable", description: "50x Gold Token" },
       { type: "repeatable", description: "50x Silver Token" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "warzone-789"
   },
   {
     id: "#76",
@@ -1019,7 +1081,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "2x Stone Of Ascension" },
       { type: "repeatable", description: "18.000.000 EXP x Rate" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "podzilla"
   },
   {
     id: "#77",
@@ -1032,7 +1095,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Exercise Weapon (43.200 Charges)" },
       { type: "repeatable", description: "10.000.000 Gold Coins" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "true-asuras"
   },
   {
     id: "#78",
@@ -1044,7 +1108,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "5x Task Coin" },
       { type: "repeatable", description: "20.000.000 EXP x Rate" }
     ],
-    room: "Corrupted"
+    room: "Corrupted",
+    bestHuntSlug: "podzilla"
   },
 
   // --- SALA 4: N'ZOTH'S ROOM (#79-#94) ---
@@ -1059,7 +1124,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "25.000.000 EXP x Rate" },
       { type: "repeatable", description: "20.000.000 EXP x Rate" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "library-earth"
   },
   {
     id: "#80",
@@ -1072,7 +1138,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "25.000.000 EXP x Rate" },
       { type: "repeatable", description: "20.000.000 EXP x Rate" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "library-ice"
   },
   {
     id: "#81",
@@ -1085,7 +1152,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "25.000.000 EXP x Rate" },
       { type: "repeatable", description: "20.000.000 EXP x Rate" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "library-fire"
   },
   {
     id: "#82",
@@ -1098,7 +1166,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Library Ticket" },
       { type: "repeatable", description: "20.000.000 EXP x Rate" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "library-energy"
   },
   {
     id: "#83",
@@ -1111,7 +1180,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Bag You Desire" },
       { type: "first", description: "1x Mini Obelisk" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "soul-war-crater"
   },
   {
     id: "#84",
@@ -1124,7 +1194,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Bag You Desire" },
       { type: "first", description: "1x Mini Obelisk" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "soul-war-mirror"
   },
   {
     id: "#85",
@@ -1137,7 +1208,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Bag You Desire" },
       { type: "first", description: "1x Mini Obelisk" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "soul-war-rotten"
   },
   {
     id: "#86",
@@ -1150,7 +1222,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Bag You Desire" },
       { type: "first", description: "1x Mini Obelisk" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "soul-war-claustrophobic"
   },
   {
     id: "#87",
@@ -1163,7 +1236,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Bag You Desire" },
       { type: "first", description: "1x Mini Obelisk" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "soul-war-ebb"
   },
   {
     id: "#88",
@@ -1176,7 +1250,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Primal Bag" },
       { type: "first", description: "1x Stone Of Ascension" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "gnomprona-crystal"
   },
   {
     id: "#89",
@@ -1189,7 +1264,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Primal Bag" },
       { type: "first", description: "1x Stone Of Ascension" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "gnomprona-sparkling"
   },
   {
     id: "#90",
@@ -1202,7 +1278,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "1x Primal Bag" },
       { type: "first", description: "1x Stone Of Ascension" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "gnomprona-monster"
   },
   {
     id: "#91",
@@ -1214,7 +1291,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3x Task Coin" },
       { type: "first", description: "5x Tainted Heart" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "rotten-blood-putrefactory"
   },
   {
     id: "#92",
@@ -1226,7 +1304,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3x Task Coin" },
       { type: "first", description: "1x Exercise Weapon (46.800 Charges)" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "rotten-blood-gloom"
   },
   {
     id: "#93",
@@ -1238,7 +1317,8 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3x Task Coin" },
       { type: "first", description: "5x Roulette Coin" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "rotten-blood-jaded"
   },
   {
     id: "#94",
@@ -1250,6 +1330,7 @@ export const linkedTasksDatabase: LinkedTask[] = [
       { type: "first", description: "3x Task Coin" },
       { type: "first", description: "5x Darklight Heart" }
     ],
-    room: "N'Zoth"
+    room: "N'Zoth",
+    bestHuntSlug: "rotten-blood-darklight"
   }
 ];

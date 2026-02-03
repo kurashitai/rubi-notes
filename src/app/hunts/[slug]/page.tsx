@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { huntsDatabase, RUBINOT_LOOT_RATE, RUBINOT_BESTIARY_RATE } from "@/data/hunts";
+import MonsterImage from "@/app/components/MonsterImage";
+import LootImage from "@/app/components/LootImage";
+
+const BASE_WIKI_URL = "https://wiki.rubinot.com";
 
 function formatProfit(baseProfit: number): string {
   const rubinot = Math.round(baseProfit * RUBINOT_LOOT_RATE);
@@ -17,6 +21,7 @@ const tierColors: Record<string, string> = {
   S: "tier-s",
   A: "tier-a",
   B: "tier-b",
+  C: "tier-b",
 };
 
 export default async function HuntDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -37,7 +42,7 @@ export default async function HuntDetailPage({ params }: { params: Promise<{ slu
         
         <div className="flex items-center gap-4 mb-4">
           <h1 className="text-3xl font-bold">{hunt.name}</h1>
-          <span className={`px-3 py-1 rounded font-bold ${tierColors[hunt.tier]}`}>
+          <span className={`px-3 py-1 rounded font-bold ${tierColors[hunt.tier] || "bg-gray-700 text-gray-300"}`}>
             {hunt.tier}-TIER
           </span>
         </div>
@@ -220,14 +225,27 @@ export default async function HuntDetailPage({ params }: { params: Promise<{ slu
             <div className="space-y-4">
               {hunt.monsters.map((monster) => (
                 <div key={monster.name} className={`p-4 rounded-lg ${monster.ignore ? 'bg-gray-800/50 opacity-60' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-lg">{monster.name}</h3>
-                    {monster.ignore && (
-                      <span className="text-xs text-red-400 px-2 py-1 bg-red-900/30 rounded">IGNORAR</span>
-                    )}
+                  <div className="flex items-center gap-4 mb-2">
+                    {/* Monster Image (Client Component) */}
+                    <div className="w-12 h-12 bg-black/40 rounded-lg flex items-center justify-center border border-gray-700 shrink-0">
+                      <MonsterImage
+                        src={`${BASE_WIKI_URL}/monsters/global/${monster.name.toLowerCase().replace(/ /g, "-")}.gif`}
+                        alt={monster.name}
+                        className="max-w-[40px] max-h-[40px] object-contain"
+                      />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold text-lg leading-tight">{monster.name}</h3>
+                        {monster.ignore && (
+                          <span className="text-xs text-red-400 px-2 py-1 bg-red-900/30 rounded">IGNORAR</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-2 text-sm mb-3">
+                  <div className="grid grid-cols-3 gap-2 text-sm mb-3 pl-[4rem]">
                     <div>
                       <span className="text-gray-500">HP:</span>
                       <span className="text-red-400 ml-1">{monster.hp.toLocaleString()}</span>
@@ -243,7 +261,7 @@ export default async function HuntDetailPage({ params }: { params: Promise<{ slu
                   </div>
 
                   {/* Weaknesses */}
-                  <div className="mb-3">
+                  <div className="mb-3 pl-[4rem]">
                     <span className="text-xs text-gray-500">Fraquezas:</span>
                     <div className="flex flex-wrap gap-1 mt-1">
                       {Object.entries(monster.weaknesses).map(([element, value]) => (
@@ -259,20 +277,27 @@ export default async function HuntDetailPage({ params }: { params: Promise<{ slu
                     </div>
                   </div>
 
-                  {/* Loot */}
-                  <div>
-                    <span className="text-xs text-gray-500">Loot:</span>
-                    <div className="flex flex-wrap gap-1 mt-1">
+                  {/* Loot with Images (Client Component) */}
+                  <div className="pl-[4rem]">
+                    <span className="text-xs text-gray-500">Loot Principal:</span>
+                    <div className="flex flex-wrap gap-2 mt-1">
                       {monster.loot.map((item, i) => (
-                        <span
+                        <div 
                           key={i}
-                          className={`text-xs px-2 py-0.5 rounded ${
-                            item.discard ? 'bg-gray-700/50 text-gray-500 line-through' : 'bg-[#14141f] text-gray-300'
+                          className={`flex items-center gap-2 px-2 py-1 rounded border ${
+                            item.discard 
+                              ? 'bg-gray-800/30 border-gray-800 text-gray-500 line-through opacity-60' 
+                              : 'bg-[#14141f] border-gray-700 text-gray-300'
                           }`}
                           title={item.discard ? 'Descartar' : `${item.chance} - ${item.value}`}
                         >
-                          {item.item}
-                        </span>
+                          <LootImage 
+                            src={`${BASE_WIKI_URL}/items/rubinot/${item.item.toLowerCase().replace(/'/g, "").replace(/ /g, "-")}.gif`}
+                            alt={item.item}
+                            className="w-5 h-5 object-contain"
+                          />
+                          <span className="text-xs">{item.item}</span>
+                        </div>
                       ))}
                     </div>
                   </div>

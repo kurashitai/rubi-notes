@@ -56,7 +56,16 @@ export interface HuntData {
   groupVersion?: string;
 }
 
+import { huntsDatabaseBatch1 } from "./hunts-batch1";
+import { huntsDatabaseExtra } from "./hunts-extra";
+import { huntsDatabaseMissing } from "./hunts-missing";
+import { huntsDatabaseFinal } from "./hunts-final-batch";
+
 export const huntsDatabase: Record<string, HuntData> = {
+  ...huntsDatabaseBatch1,
+  ...huntsDatabaseExtra,
+  ...huntsDatabaseMissing,
+  ...huntsDatabaseFinal,
   "weretigers": {
     slug: "weretigers",
     name: "Weretigers",

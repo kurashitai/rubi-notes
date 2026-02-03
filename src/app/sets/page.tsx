@@ -1,419 +1,136 @@
 import Link from "next/link";
+import LootImage from "@/app/components/LootImage";
 
-interface EquipmentItem {
+const BASE_WIKI_URL = "https://wiki.rubinot.com";
+
+interface SetItem {
   name: string;
-  defense?: number;
-  armor?: number;
-  slots: number;
-  bonus?: string;
-  drop?: string;
-  quest?: string;
-  recommended?: boolean;
+  slot: "Helmet" | "Armor" | "Legs" | "Boots" | "Shield" | "Amulet" | "Ring";
+  level: number;
+  stats: string;
+  resist?: string;
+  imbueSlots: number;
+  obtain: string;
 }
 
-interface SetByLevel {
-  range: string;
-  helmet: EquipmentItem[];
-  armor: EquipmentItem[];
-  legs: EquipmentItem[];
-  boots: EquipmentItem[];
-  shield: EquipmentItem[];
-  amulet: EquipmentItem[];
-  ring: EquipmentItem[];
-}
+const equipment: SetItem[] = [
+  // Helmets
+  { name: "Soldier Helmet", slot: "Helmet", level: 8, stats: "Arm: 5", imbueSlots: 0, obtain: "Loots / Shop" },
+  { name: "Dark Helmet", slot: "Helmet", level: 20, stats: "Arm: 6", imbueSlots: 0, obtain: "Rotworms" },
+  { name: "Crusader Helmet", slot: "Helmet", level: 40, stats: "Arm: 8", imbueSlots: 0, obtain: "Quest (Dwarf Mines)" },
+  { name: "Zaoan Helmet", slot: "Helmet", level: 50, stats: "Arm: 9, Phy +5%", imbueSlots: 1, obtain: "WOTE Quest" },
+  { name: "Prismatic Helmet", slot: "Helmet", level: 150, stats: "Arm: 9, Phy +5%", imbueSlots: 1, obtain: "Warzone" },
+  { name: "Terra Helmet", slot: "Helmet", level: 230, stats: "Arm: 9, Earth +5%", imbueSlots: 2, obtain: "Oberon / Market" },
+  { name: "Cobra Hood", slot: "Helmet", level: 270, stats: "Arm: 10, Skill +2", imbueSlots: 2, obtain: "Scarlett" },
+  { name: "Falcon Coif", slot: "Helmet", level: 300, stats: "Arm: 10, Phy +3%, Fire +10%", imbueSlots: 2, obtain: "Oberon" },
 
-const sets: SetByLevel[] = [
-  {
-    range: "Level 8-50",
-    helmet: [
-      { name: "Zaoan Helmet", armor: 9, slots: 1, bonus: "Physical +5%", drop: "Lizards (Zao)", recommended: true },
-      { name: "Demon Helmet", armor: 10, slots: 2, bonus: "-", drop: "Demons", quest: "Annihilator" },
-      { name: "Royal Helmet", armor: 9, slots: 0, bonus: "-", drop: "Dragons, DLs" },
-    ],
-    armor: [
-      { name: "Magic Plate Armor", armor: 17, slots: 2, bonus: "-", drop: "Dragons, Demons", recommended: true },
-      { name: "Blue Robe", armor: 11, slots: 0, bonus: "-", drop: "Warlocks" },
-      { name: "Knight Armor", armor: 12, slots: 0, bonus: "-", drop: "Knights, Heroes" },
-    ],
-    legs: [
-      { name: "Dwarven Legs", armor: 7, slots: 0, bonus: "Physical +3%", drop: "Dwarfs", recommended: true },
-      { name: "Zaoan Legs", armor: 8, slots: 0, bonus: "Physical +2%", drop: "Lizards (Zao)" },
-      { name: "Knight Legs", armor: 8, slots: 0, bonus: "-", drop: "Knights" },
-    ],
-    boots: [
-      { name: "Soft Boots", armor: 0, slots: 0, bonus: "Fast Regeneration", quest: "Enchanted Boots", recommended: true },
-      { name: "Boots of Haste", armor: 0, slots: 1, bonus: "Speed +20", drop: "Demons, DLs" },
-      { name: "Steel Boots", armor: 3, slots: 0, bonus: "-", drop: "Dwarfs" },
-    ],
-    shield: [
-      { name: "Mastermind Shield", defense: 37, slots: 1, bonus: "-", drop: "Demons, Warlocks", recommended: true },
-      { name: "Demon Shield", defense: 35, slots: 0, bonus: "-", drop: "Demons" },
-      { name: "Blessed Shield", defense: 40, slots: 0, bonus: "-", quest: "Inquisition" },
-    ],
-    amulet: [
-      { name: "Werewolf Amulet", armor: 3, slots: 0, bonus: "Physical +6%", drop: "Werecreatures", recommended: true },
-      { name: "Platinum Amulet", armor: 2, slots: 0, bonus: "-", drop: "Various" },
-      { name: "Stone Skin Amulet", armor: 0, slots: 0, bonus: "Physical/Death protect", drop: "Various" },
-    ],
-    ring: [
-      { name: "Club Ring", armor: 0, slots: 0, bonus: "Club +4", drop: "NPC", recommended: true },
-      { name: "Ring of Healing", armor: 0, slots: 0, bonus: "Faster regen", drop: "Various" },
-      { name: "Life Ring", armor: 0, slots: 0, bonus: "HP regen", drop: "Various" },
-    ],
-  },
-  {
-    range: "Level 50-100",
-    helmet: [
-      { name: "Zaoan Helmet", armor: 9, slots: 1, bonus: "Physical +5%", drop: "Lizards", recommended: true },
-      { name: "Depth Galea", armor: 8, slots: 2, bonus: "-", drop: "Deeplings" },
-      { name: "Warrior Helmet", armor: 9, slots: 0, bonus: "-", drop: "Various" },
-    ],
-    armor: [
-      { name: "Ornate Chestplate", armor: 15, slots: 2, bonus: "-", drop: "Deeplings", recommended: true },
-      { name: "Magic Plate Armor", armor: 17, slots: 2, bonus: "-", drop: "Various" },
-      { name: "Prismatic Armor", armor: 14, slots: 2, bonus: "Physical +5%", quest: "Ferumbras' Ascension" },
-    ],
-    legs: [
-      { name: "Ornate Legs", armor: 8, slots: 1, bonus: "-", drop: "Deeplings", recommended: true },
-      { name: "Zaoan Legs", armor: 8, slots: 0, bonus: "Physical +2%", drop: "Lizards" },
-      { name: "Dwarven Legs", armor: 7, slots: 0, bonus: "Physical +3%", drop: "Dwarfs" },
-    ],
-    boots: [
-      { name: "Depth Calcei", armor: 2, slots: 1, bonus: "Speed +15", drop: "Deeplings", recommended: true },
-      { name: "Soft Boots", armor: 0, slots: 0, bonus: "Fast Regeneration", quest: "Enchanted Boots" },
-      { name: "Boots of Haste", armor: 0, slots: 1, bonus: "Speed +20", drop: "Various" },
-    ],
-    shield: [
-      { name: "Ornate Shield", defense: 39, slots: 2, bonus: "-", drop: "Deeplings", recommended: true },
-      { name: "Mastermind Shield", defense: 37, slots: 1, bonus: "-", drop: "Various" },
-      { name: "Prismatic Shield", defense: 38, slots: 1, bonus: "Physical +5%", drop: "Various" },
-    ],
-    amulet: [
-      { name: "Werewolf Amulet", armor: 3, slots: 0, bonus: "Physical +6%", drop: "Werecreatures", recommended: true },
-      { name: "Foxtail Amulet", armor: 2, slots: 0, bonus: "Speed +15", drop: "Werefoxes" },
-      { name: "Gill Necklace", armor: 0, slots: 0, bonus: "Drowning immune", drop: "Quaras" },
-    ],
-    ring: [
-      { name: "Club Ring", armor: 0, slots: 0, bonus: "Club +4", drop: "NPC", recommended: true },
-      { name: "Prismatic Ring", armor: 0, slots: 0, bonus: "Physical +4%", drop: "Various" },
-      { name: "Ring of Blue Plasma", armor: 0, slots: 0, bonus: "Mana +25", drop: "Various" },
-    ],
-  },
-  {
-    range: "Level 100-200",
-    helmet: [
-      { name: "Cobra Hood", armor: 10, slots: 2, bonus: "Club +4, Life Leech +5%", drop: "Cobra Bastion", recommended: true },
-      { name: "Lion Spangenhelm", armor: 10, slots: 2, bonus: "Sword/Axe/Club +3", drop: "Lion Sanctuary" },
-      { name: "Zaoan Helmet", armor: 9, slots: 1, bonus: "Physical +5%", drop: "Lizards" },
-    ],
-    armor: [
-      { name: "Ornate Chestplate", armor: 15, slots: 2, bonus: "-", drop: "Deeplings", recommended: true },
-      { name: "Prismatic Armor", armor: 14, slots: 2, bonus: "Physical +5%", quest: "Various" },
-      { name: "Gnome Armor", armor: 14, slots: 3, bonus: "-", quest: "Warzone" },
-    ],
-    legs: [
-      { name: "Ornate Legs", armor: 8, slots: 1, bonus: "-", drop: "Deeplings", recommended: true },
-      { name: "Fabulous Legs", armor: 9, slots: 2, bonus: "-", quest: "Ferumbras' Ascension" },
-      { name: "Prismatic Legs", armor: 8, slots: 1, bonus: "Physical +4%", drop: "Various" },
-    ],
-    boots: [
-      { name: "Pair of Dreamwalkers", armor: 3, slots: 2, bonus: "Speed +20", drop: "Nightmare creatures", recommended: true },
-      { name: "Depth Calcei", armor: 2, slots: 1, bonus: "Speed +15", drop: "Deeplings" },
-      { name: "Guardian Boots", armor: 3, slots: 1, bonus: "Physical +3%", drop: "Various" },
-    ],
-    shield: [
-      { name: "Ornate Shield", defense: 39, slots: 2, bonus: "-", drop: "Deeplings", recommended: true },
-      { name: "Prismatic Shield", defense: 38, slots: 1, bonus: "Physical +5%", drop: "Various" },
-      { name: "Lion Shield", defense: 40, slots: 2, bonus: "-", drop: "Lion Sanctuary" },
-    ],
-    amulet: [
-      { name: "Collar of Red Plasma", armor: 0, slots: 0, bonus: "Sword/Axe/Club +4", drop: "Ferumbras' Ascension", recommended: true },
-      { name: "Werewolf Amulet", armor: 3, slots: 0, bonus: "Physical +6%", drop: "Werecreatures" },
-      { name: "Sleep Shawl", armor: 0, slots: 0, bonus: "Paralysis -15%", drop: "Nightmare creatures" },
-    ],
-    ring: [
-      { name: "Prismatic Ring", armor: 0, slots: 0, bonus: "Physical +4%", drop: "Various", recommended: true },
-      { name: "Ring of Red Plasma", armor: 0, slots: 0, bonus: "Sword/Axe/Club +4", drop: "Various" },
-      { name: "Club Ring", armor: 0, slots: 0, bonus: "Club +4", drop: "NPC" },
-    ],
-  },
-  {
-    range: "Level 200-300",
-    helmet: [
-      { name: "Cobra Hood", armor: 10, slots: 2, bonus: "Club +4, Life Leech +5%", drop: "Cobra Bastion", recommended: true },
-      { name: "Lion Spangenhelm", armor: 10, slots: 2, bonus: "Club +3", drop: "Lion Sanctuary" },
-      { name: "Falcon Coif", armor: 10, slots: 2, bonus: "Mana Leech +3%", drop: "Falcon Bastion" },
-    ],
-    armor: [
-      { name: "Falcon Plate", armor: 17, slots: 3, bonus: "Physical +8%", drop: "Oberon", recommended: true },
-      { name: "Gnome Armor", armor: 14, slots: 3, bonus: "-", quest: "Warzone" },
-      { name: "Lion Plate", armor: 16, slots: 2, bonus: "Physical +6%", drop: "Lion Sanctuary" },
-    ],
-    legs: [
-      { name: "Fabulous Legs", armor: 9, slots: 2, bonus: "-", quest: "Ferumbras' Ascension", recommended: true },
-      { name: "Ornate Legs", armor: 8, slots: 1, bonus: "-", drop: "Deeplings" },
-      { name: "Soulful Legs", armor: 10, slots: 2, bonus: "-", drop: "Soul War" },
-    ],
-    boots: [
-      { name: "Pair of Dreamwalkers", armor: 3, slots: 2, bonus: "Speed +20", drop: "Nightmares", recommended: true },
-      { name: "Falcon Greaves", armor: 4, slots: 1, bonus: "Speed +25", drop: "Falcon Bastion" },
-      { name: "Cobra Boots", armor: 3, slots: 2, bonus: "-", drop: "Cobra Bastion" },
-    ],
-    shield: [
-      { name: "Falcon Shield", defense: 43, slots: 2, bonus: "-", drop: "Falcon Bastion", recommended: true },
-      { name: "Lion Shield", defense: 40, slots: 2, bonus: "-", drop: "Lion Sanctuary" },
-      { name: "Ornate Shield", defense: 39, slots: 2, bonus: "-", drop: "Deeplings" },
-    ],
-    amulet: [
-      { name: "Collar of Red Plasma", armor: 0, slots: 0, bonus: "Club +4", drop: "Various", recommended: true },
-      { name: "Pendant of Prosperity", armor: 0, slots: 0, bonus: "Loot +5%", drop: "Various" },
-      { name: "Werewolf Amulet", armor: 3, slots: 0, bonus: "Physical +6%", drop: "Werecreatures" },
-    ],
-    ring: [
-      { name: "Ring of Red Plasma", armor: 0, slots: 0, bonus: "Club +4", drop: "Various", recommended: true },
-      { name: "Prismatic Ring", armor: 0, slots: 0, bonus: "Physical +4%", drop: "Various" },
-      { name: "Ring of Souls", armor: 0, slots: 0, bonus: "Magic Level +2", drop: "Soul War" },
-    ],
-  },
-  {
-    range: "Level 300-500",
-    helmet: [
-      { name: "Cobra Hood", armor: 10, slots: 2, bonus: "Club +4, Life Leech +5%", drop: "Cobra Bastion", recommended: true },
-      { name: "Falcon Coif", armor: 10, slots: 2, bonus: "Mana Leech +3%", drop: "Falcon Bastion" },
-      { name: "Soulshell", armor: 12, slots: 2, bonus: "-", drop: "Soul War" },
-    ],
-    armor: [
-      { name: "Falcon Plate", armor: 17, slots: 3, bonus: "Physical +8%", drop: "Oberon", recommended: true },
-      { name: "Soulmantle", armor: 18, slots: 3, bonus: "-", drop: "Soul War" },
-      { name: "Lion Plate", armor: 16, slots: 2, bonus: "Physical +6%", drop: "Lion Sanctuary" },
-    ],
-    legs: [
-      { name: "Soulful Legs", armor: 10, slots: 2, bonus: "-", drop: "Soul War", recommended: true },
-      { name: "Fabulous Legs", armor: 9, slots: 2, bonus: "-", quest: "Ferumbras' Ascension" },
-      { name: "Falcon Legs", armor: 9, slots: 2, bonus: "-", drop: "Falcon Bastion" },
-    ],
-    boots: [
-      { name: "Soulshroud", armor: 4, slots: 2, bonus: "Speed +25", drop: "Soul War", recommended: true },
-      { name: "Falcon Greaves", armor: 4, slots: 1, bonus: "Speed +25", drop: "Falcon Bastion" },
-      { name: "Pair of Dreamwalkers", armor: 3, slots: 2, bonus: "Speed +20", drop: "Nightmares" },
-    ],
-    shield: [
-      { name: "Falcon Shield", defense: 43, slots: 2, bonus: "-", drop: "Falcon Bastion", recommended: true },
-      { name: "Soulbastion", defense: 45, slots: 2, bonus: "-", drop: "Soul War" },
-      { name: "Lion Shield", defense: 40, slots: 2, bonus: "-", drop: "Lion Sanctuary" },
-    ],
-    amulet: [
-      { name: "Collar of Red Plasma", armor: 0, slots: 0, bonus: "Club +4", drop: "Various", recommended: true },
-      { name: "Amulet of Soul War", armor: 5, slots: 0, bonus: "-", drop: "Soul War" },
-      { name: "Pendant of Prosperity", armor: 0, slots: 0, bonus: "Loot +5%", drop: "Various" },
-    ],
-    ring: [
-      { name: "Ring of Red Plasma", armor: 0, slots: 0, bonus: "Club +4", drop: "Various", recommended: true },
-      { name: "Ring of Souls", armor: 0, slots: 0, bonus: "-", drop: "Soul War" },
-      { name: "Prismatic Ring", armor: 0, slots: 0, bonus: "Physical +4%", drop: "Various" },
-    ],
-  },
+  // Armors
+  { name: "Plate Armor", slot: "Armor", level: 8, stats: "Arm: 10", imbueSlots: 0, obtain: "Loots / Shop" },
+  { name: "Knight Armor", slot: "Armor", level: 20, stats: "Arm: 12", imbueSlots: 0, obtain: "Quest / Cyclops" },
+  { name: "Golden Armor", slot: "Armor", level: 40, stats: "Arm: 14", imbueSlots: 0, obtain: "Warlord Arena / BK Quest" },
+  { name: "Dragon Scale Mail", slot: "Armor", level: 50, stats: "Arm: 15", imbueSlots: 0, obtain: "Dragons / Hydras" },
+  { name: "Magic Plate Armor", slot: "Armor", level: 80, stats: "Arm: 16", imbueSlots: 1, obtain: "ANI Quest" },
+  { name: "Prismatic Armor", slot: "Armor", level: 120, stats: "Arm: 15, Phy +5%, Speed +15", imbueSlots: 1, obtain: "Warzone" },
+  { name: "Ornate Chestplate", slot: "Armor", level: 200, stats: "Arm: 16, Phy +8%, Shield +3", imbueSlots: 2, obtain: "Market (Loot)" },
+  { name: "Falcon Plate", slot: "Armor", level: 300, stats: "Arm: 18, Phy +12%, Shield +4", imbueSlots: 2, obtain: "Oberon" },
+  { name: "Lion Plate", slot: "Armor", level: 270, stats: "Arm: 17, Phy +10%, Skill +3", imbueSlots: 2, obtain: "Drume" },
+
+  // Legs
+  { name: "Plate Legs", slot: "Legs", level: 8, stats: "Arm: 7", imbueSlots: 0, obtain: "Loots / Shop" },
+  { name: "Knight Legs", slot: "Legs", level: 20, stats: "Arm: 8", imbueSlots: 0, obtain: "Quest / Giant Spider" },
+  { name: "Zaoan Legs", slot: "Legs", level: 50, stats: "Arm: 8, Phy +2%", imbueSlots: 0, obtain: "Mission 7 WOTE / Loot" },
+  { name: "Dwarven Legs", slot: "Legs", level: 40, stats: "Arm: 7, Phy +3%", imbueSlots: 0, obtain: "Quest (Hidden)" },
+  { name: "Ornate Legs", slot: "Legs", level: 185, stats: "Arm: 8, Phy +5%", imbueSlots: 0, obtain: "Market (Loot)" },
+  { name: "Fabulous Legs", slot: "Legs", level: 225, stats: "Arm: 9, Phy +4%, Fire +2%, Skill +2", imbueSlots: 0, obtain: "Oberon / Market" },
+  { name: "Falcon Greaves", slot: "Legs", level: 300, stats: "Arm: 10, Phy +7%, Ice +7%", imbueSlots: 0, obtain: "Oberon" },
+
+  // Boots
+  { name: "Leather Boots", slot: "Boots", level: 8, stats: "Arm: 1", imbueSlots: 0, obtain: "Basic" },
+  { name: "Boots of Haste", slot: "Boots", level: 20, stats: "Speed +20", imbueSlots: 0, obtain: "Necromancers / Quest" },
+  { name: "Guardian Boots", slot: "Boots", level: 70, stats: "Arm: 3, Phy +2%, Holy -2%", imbueSlots: 0, obtain: "Market" },
+  { name: "Depth Calcei", slot: "Boots", level: 150, stats: "Arm: 3, Phy +5%, Water -5%", imbueSlots: 0, obtain: "Deeplings" },
+  { name: "Cobra Boots", slot: "Boots", level: 220, stats: "Arm: 3, Speed +15, Skill +1", imbueSlots: 0, obtain: "Scarlett" },
+  { name: "Pair of Dreamwalkers", slot: "Boots", level: 250, stats: "Speed +20, Skill +1, Energy/Earth prot", imbueSlots: 0, obtain: "Dream Courts" },
+
+  // Shields
+  { name: "Dwarven Shield", slot: "Shield", level: 8, stats: "Def: 26", imbueSlots: 0, obtain: "Quest / Rotworm" },
+  { name: "Dragon Shield", slot: "Shield", level: 25, stats: "Def: 31", imbueSlots: 0, obtain: "Dragons" },
+  { name: "Tower Shield", slot: "Shield", level: 30, stats: "Def: 32", imbueSlots: 0, obtain: "Quest (Kazordoon)" },
+  { name: "Medusa Shield", slot: "Shield", level: 40, stats: "Def: 33", imbueSlots: 0, obtain: "Necromancers" },
+  { name: "Vampire Shield", slot: "Shield", level: 45, stats: "Def: 34", imbueSlots: 0, obtain: "Vampires" },
+  { name: "Demon Shield", slot: "Shield", level: 60, stats: "Def: 35", imbueSlots: 1, obtain: "Quest / Demons" },
+  { name: "Mastermind Shield", slot: "Shield", level: 80, stats: "Def: 37", imbueSlots: 1, obtain: "INQ / Demons" },
+  { name: "Ornate Shield", slot: "Shield", level: 130, stats: "Def: 36, Phy +5%", imbueSlots: 1, obtain: "Market (Loot)" },
+  { name: "Prismatic Shield", slot: "Shield", level: 150, stats: "Def: 37, Phy +4%, Speed +15", imbueSlots: 1, obtain: "Warzone" },
+  { name: "Gnome Shield", slot: "Shield", level: 200, stats: "Def: 38, Phy +6%, Energy +8%, Ice -2%", imbueSlots: 1, obtain: "Warzone 4-6" },
+  { name: "Falcon Shield", slot: "Shield", level: 300, stats: "Def: 39, Phy +10%, Fire +10%", imbueSlots: 1, obtain: "Oberon" },
+  { name: "Lion Shield", slot: "Shield", level: 270, stats: "Def: 39, Phy +5%, Earth/Ice +5%, Skill +3", imbueSlots: 1, obtain: "Drume" },
 ];
 
-const slotColors: Record<number, string> = {
-  0: "text-gray-500",
-  1: "text-blue-400",
-  2: "text-purple-400",
-  3: "text-amber-400",
-};
-
 export default function SetsPage() {
+  const grouped = {
+    Helmet: equipment.filter(i => i.slot === "Helmet"),
+    Armor: equipment.filter(i => i.slot === "Armor"),
+    Legs: equipment.filter(i => i.slot === "Legs"),
+    Boots: equipment.filter(i => i.slot === "Boots"),
+    Shield: equipment.filter(i => i.slot === "Shield"),
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* Header */}
       <div className="mb-8">
-        <Link href="/" className="text-purple-400 hover:text-purple-300 mb-4 inline-block">
-          ← Voltar
-        </Link>
-        <h1 className="text-3xl font-bold mb-2">🛡️ Sets Recomendados</h1>
-        <p className="text-gray-500">Equipamentos completos para Knight Club por range de level</p>
+        <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+          <span>🛡️</span> Sets e Equipamentos
+        </h1>
+        <p className="text-gray-400">
+          Guia de equipamentos defensivos e utilitários para Knight.
+        </p>
       </div>
 
-      {/* Legend */}
-      <div className="card-glow p-4 mb-8">
-        <h3 className="font-semibold mb-3">📋 Legenda de Slots de Imbuement</h3>
-        <div className="flex flex-wrap gap-4 text-sm">
-          <span className="text-gray-500">0 slots</span>
-          <span className="text-blue-400">● 1 slot</span>
-          <span className="text-purple-400">●● 2 slots</span>
-          <span className="text-amber-400">●●● 3 slots</span>
-          <span className="ml-4 text-amber-400">⭐ = Recomendado</span>
-        </div>
-      </div>
-
-      {/* Sets by Level Range */}
-      {sets.map((set) => (
-        <section key={set.range} className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-            <span className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-purple-800">
-              {set.range}
-            </span>
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {/* Helmet */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>🪖</span> Helmet
-              </h3>
-              {set.helmet.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                    <span className={slotColors[item.slots]}>{'●'.repeat(item.slots) || '-'}</span>
+      <div className="space-y-12">
+        {Object.entries(grouped).map(([slot, items]) => (
+          <section key={slot}>
+            <h2 className="text-xl font-bold mb-4 text-purple-400 border-b border-gray-800 pb-2">
+              {slot}s
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {items.map((item, i) => (
+                <div key={i} className="card-glow bg-[#1e1e2e] p-3 rounded-lg border border-gray-800 flex items-start gap-4 hover:border-purple-500/30 transition-colors">
+                  <div className="w-12 h-12 bg-black/40 rounded flex items-center justify-center shrink-0 border border-gray-700 mt-1">
+                    <LootImage 
+                      src={`${BASE_WIKI_URL}/items/rubinot/${item.name.toLowerCase().replace(/ /g, "-").replace(/'/g, "").replace(/\./g, "")}.gif`} 
+                      alt={item.name}
+                      className="w-10 h-10 object-contain"
+                    />
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Arm: {item.armor} | {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center mb-1">
+                      <h3 className="font-bold text-white text-sm">{item.name}</h3>
+                      <span className="text-[10px] bg-purple-900/30 text-purple-300 px-1.5 py-0.5 rounded border border-purple-900/50 font-bold">
+                        Lvl {item.level}
+                      </span>
+                    </div>
+                    
+                    <div className="text-xs text-gray-300 mb-1">
+                      {item.stats}
+                    </div>
+                    
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-gray-500 italic truncate max-w-[120px]" title={item.obtain}>
+                        {item.obtain}
+                      </span>
+                      {item.imbueSlots > 0 && (
+                        <span className="text-amber-400 flex items-center gap-0.5" title={`${item.imbueSlots} Slot(s)`}>
+                          {Array(item.imbueSlots).fill("○").join("")}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
                 </div>
               ))}
             </div>
-
-            {/* Armor */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>🦺</span> Armor
-              </h3>
-              {set.armor.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                    <span className={slotColors[item.slots]}>{'●'.repeat(item.slots) || '-'}</span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Arm: {item.armor} | {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
-                  </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Legs */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>👖</span> Legs
-              </h3>
-              {set.legs.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                    <span className={slotColors[item.slots]}>{'●'.repeat(item.slots) || '-'}</span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Arm: {item.armor} | {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
-                  </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Boots */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>👢</span> Boots
-              </h3>
-              {set.boots.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                    <span className={slotColors[item.slots]}>{'●'.repeat(item.slots) || '-'}</span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Arm: {item.armor} | {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
-                  </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Shield */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>🛡️</span> Shield
-              </h3>
-              {set.shield.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                    <span className={slotColors[item.slots]}>{'●'.repeat(item.slots) || '-'}</span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Def: {item.defense} | {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
-                  </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Amulet */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>📿</span> Amulet
-              </h3>
-              {set.amulet.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
-                  </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Ring */}
-            <div className="card-glow">
-              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                <span>💍</span> Ring
-              </h3>
-              {set.ring.map((item: any) => (
-                <div key={item.name} className={`p-2 rounded mb-2 ${item.recommended ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-[#1e1e2e]'}`}>
-                  <div className="flex items-center justify-between">
-                    <span className={item.recommended ? 'text-amber-400 font-semibold' : ''}>
-                      {item.recommended && '⭐ '}{item.name}
-                    </span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {item.bonus !== '-' ? item.bonus : 'Sem bônus'}
-                  </div>
-                  <div className="text-xs text-gray-600">{item.drop || item.quest}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ))}
-
-      {/* Tip */}
-      <div className="card-glow p-6 mt-8">
-        <h3 className="font-semibold text-lg mb-2">💡 Dicas de Imbuement</h3>
-        <ul className="text-sm text-gray-400 space-y-2">
-          <li>• <strong>Helmet:</strong> Vampirism (Life Leech) ou Void (Mana Leech)</li>
-          <li>• <strong>Armor:</strong> Proteção elemental conforme hunt (Fire, Ice, Earth, Energy)</li>
-          <li>• <strong>Weapon:</strong> Vampirism + Void + Strike (se 3 slots)</li>
-          <li>• <strong>Shield:</strong> Proteção elemental secundária</li>
-          <li>• <strong>Prioridade:</strong> Vampirism (Helmet/Weapon) → Proteção (Armor) → Critical (Weapon)</li>
-        </ul>
+          </section>
+        ))}
       </div>
     </div>
   );
