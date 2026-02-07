@@ -27,6 +27,7 @@ const secondaryNavItems: NavItem[] = [
   { label: "Outfits", href: "/outfits", icon: "👘" },
   { label: "Mounts", href: "/mounts", icon: "🦄" },
   { label: "Farm Guide", href: "/farm-guide", icon: "💰" },
+  { label: "Items", href: "/items", icon: "🧰" },
   { label: "Quests", href: "/quests", icon: "🎯" },
   { label: "Way of the Monk", href: "/monk-quest", icon: "🧙" },
   { label: "Wheel of Destiny", href: "/wheel-of-destiny", icon: "🎡" },

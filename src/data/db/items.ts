@@ -411,3 +411,7 @@ export const itemsDb: ItemRecord[] = [
     "image": "/items/adamant-shield.gif"
   }
 ];
+
+export const itemsBySlug: Record<string, ItemRecord> = Object.fromEntries(
+  itemsDb.map((item) => [item.slug, item])
+);
