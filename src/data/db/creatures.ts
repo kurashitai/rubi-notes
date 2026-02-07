@@ -45,7 +45,7 @@ export interface CreatureRecord {
   };
 }
 
-export const creaturesDb = [
+export const creaturesDb = ([
   {
     "id": "1st-mate-ratticus",
     "slug": "1st-mate-ratticus",
@@ -140303,7 +140303,7 @@ export const creaturesDb = [
       "url": "https://tibiawiki.dev/api/creatures/Zushuka"
     }
   }
-] as unknown as CreatureRecord[];
+] as any) as CreatureRecord[];
 
 export const creaturesBySlug: Record<string, CreatureRecord> = Object.fromEntries(
   creaturesDb.map((creature) => [creature.slug, creature])
