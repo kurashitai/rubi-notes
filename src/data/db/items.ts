@@ -24,6 +24,8 @@ export interface ItemRecord {
   sellTo?: string;
   
   droppedBy?: string[];
+
+  implemented?: string;
   
   image?: string | null;
 }

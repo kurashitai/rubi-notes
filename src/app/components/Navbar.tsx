@@ -23,6 +23,7 @@ const mainNavItems: NavItem[] = [
 const secondaryNavItems: NavItem[] = [
   { label: "Armas", href: "/weapons", icon: "⚔️" },
   { label: "Sets", href: "/sets", icon: "🛡️" },
+  { label: "Charlover", href: "/charlover", icon: "💖" },
   { label: "Outfits", href: "/outfits", icon: "👘" },
   { label: "Mounts", href: "/mounts", icon: "🦄" },
   { label: "Farm Guide", href: "/farm-guide", icon: "💰" },

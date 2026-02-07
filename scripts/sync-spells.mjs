@@ -15,6 +15,11 @@ const REFRESH = process.argv.includes('--refresh');
 // Ensure directories exist
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
+function safeNumber(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
 function slugify(value) {
   return value
     .normalize('NFKD')
@@ -52,6 +57,7 @@ async function fetchSpellData(name) {
 
 function parseSpell(raw, name) {
   if (!raw) return null;
+  if (typeof raw === 'object' && raw && Object.keys(raw).length === 0) return null;
   const slug = slugify(name);
   
   // Parse vocation
@@ -67,15 +73,15 @@ function parseSpell(raw, name) {
   return {
     id: slug,
     name: raw.name || name,
-    words: raw.words,
+    words: raw.words || "",
     vocation: vocs.length ? vocs : ['All'],
     type: raw.type || 'Instant',
-    cooldown: raw.cooldown ? Number(raw.cooldown) : 2,
+    cooldown: safeNumber(raw.cooldown) || 2,
     requirement: {
-      level: raw.levelrequired ? Number(raw.levelrequired) : 0,
+      level: safeNumber(raw.levelrequired),
       magicLevel: 0, // not in API usually
-      mana: raw.mana ? Number(raw.mana) : 0,
-      soulPoints: raw.soul ? Number(raw.soul) : 0,
+      mana: safeNumber(raw.mana),
+      soulPoints: safeNumber(raw.soul),
       premium: raw.premium === 'yes'
     },
     damage: {
@@ -84,7 +90,7 @@ function parseSpell(raw, name) {
       element: raw.damagetype ? raw.damagetype.toLowerCase() : 'physical',
       formula: raw.basepower ? `Power: ${raw.basepower}` : undefined
     },
-    description: raw.effect ? raw.effect.replace(/\[\[File:.*?\]\]/g, '').trim() : raw.notes,
+    description: (raw.effect ? raw.effect.replace(/\[\[File:.*?\]\]/g, '').trim() : raw.notes) || "",
     notes: raw.notes
   };
 }
