@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import LootImage from "@/app/components/LootImage";
 import { itemsBySlug, itemsDb } from "@/data/db/items";
 import { huntsDatabase } from "@/data/hunts";
 
@@ -50,10 +51,9 @@ export default async function ItemDetailPage({ params }: { params: Promise<{ slu
           <div className="flex items-start gap-5">
             <div className="flex items-center justify-center w-20 h-20 rounded border border-[var(--glass-border)] bg-[var(--glass-bg-hover)] overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <LootImage
                 src={item.image || `/items/${item.slug}.gif`}
                 alt={item.name}
-                className="max-w-[56px] max-h-[56px] object-contain"
               />
             </div>
 
