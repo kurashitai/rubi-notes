@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
 
-const CREATURES_DB_PATH = path.join(process.cwd(), "rubi-notes/src/data/db/creatures.ts");
-const ITEMS_IMG_DIR = path.join(process.cwd(), "rubi-notes/public/items");
+const CREATURES_DB_PATH = path.join(process.cwd(), "src/data/db/creatures.ts");
+const ITEMS_IMG_DIR = path.join(process.cwd(), "public/items");
+
+const DOWNLOAD_ITEM_IMAGES = !process.argv.includes("--no-download-item-images");
 
 // Bestiary Points & Kills Table (Ordinary Creatures)
 const BESTIARY_TABLE = {
@@ -121,12 +123,11 @@ async function main() {
         const localPath = path.join(ITEMS_IMG_DIR, imgName);
         const publicUrl = `/items/${imgName}`;
         
-        if (!fs.existsSync(localPath)) {
-          // Download in background (fire and forget for speed, or await if critical)
+        if (DOWNLOAD_ITEM_IMAGES && !fs.existsSync(localPath) && !fs.existsSync(localPath.replace(".gif", ".png"))) {
           // We await here to not overwhelm connection
           const success = await downloadImage(`https://tibiawiki.dev/images/${itemNameSlug}.gif`, localPath);
           if (!success) {
-             await downloadImage(`https://tibiawiki.dev/images/${itemNameSlug}.png`, localPath.replace(".gif", ".png"));
+            await downloadImage(`https://tibiawiki.dev/images/${itemNameSlug}.png`, localPath.replace(".gif", ".png"));
           }
         }
         
