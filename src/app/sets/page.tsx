@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LootImage from "@/app/components/LootImage";
+import { BreadcrumbWithHome } from "@/components/ui/breadcrumb";
 
 const BASE_WIKI_URL = "https://wiki.rubinot.com";
 
@@ -78,11 +79,15 @@ export default function SetsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+      {/* Breadcrumb */}
+      <BreadcrumbWithHome items={[{ label: "Sets e Equipamentos" }]} />
+
+      {/* Header */}
+      <div className="mb-8 mt-6">
+        <h1 className="text-3xl font-bold mb-2 flex items-center gap-3 bg-gradient-to-r from-[var(--glass-rubi-primary)] to-[var(--glass-accent-glow)] bg-clip-text text-transparent">
           <span>🛡️</span> Sets e Equipamentos
         </h1>
-        <p className="text-gray-400">
+        <p className="text-[var(--glass-text-secondary)]">
           Guia de equipamentos defensivos e utilitários para Knight.
         </p>
       </div>
@@ -90,39 +95,48 @@ export default function SetsPage() {
       <div className="space-y-12">
         {Object.entries(grouped).map(([slot, items]) => (
           <section key={slot}>
-            <h2 className="text-xl font-bold mb-4 text-purple-400 border-b border-gray-800 pb-2">
+            <h2 className="text-xl font-bold mb-4 text-[var(--glass-text-primary)] border-b border-[var(--glass-border)] pb-2 flex items-center gap-2">
+              <span className="text-[var(--glass-rubi-primary)]">
+                {slot === "Helmet" && "🪖"}
+                {slot === "Armor" && "🦺"}
+                {slot === "Legs" && "👖"}
+                {slot === "Boots" && "👢"}
+                {slot === "Shield" && "🛡️"}
+              </span>
               {slot}s
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {items.map((item, i) => (
-                <div key={i} className="card-glow bg-[#1e1e2e] p-3 rounded-lg border border-gray-800 flex items-start gap-4 hover:border-purple-500/30 transition-colors">
-                  <div className="w-12 h-12 bg-black/40 rounded flex items-center justify-center shrink-0 border border-gray-700 mt-1">
+                <div key={i} className="glass-card p-3 flex items-start gap-4 hover:scale-[1.02] transition-transform">
+                  <div className="w-12 h-12 bg-[var(--glass-bg-hover)] rounded-lg flex items-center justify-center shrink-0 border border-[var(--glass-border)] mt-1">
                     <LootImage 
                       src={`${BASE_WIKI_URL}/items/rubinot/${item.name.toLowerCase().replace(/ /g, "-").replace(/'/g, "").replace(/\./g, "")}.gif`} 
                       alt={item.name}
                       className="w-10 h-10 object-contain"
                     />
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-center mb-1">
-                      <h3 className="font-bold text-white text-sm">{item.name}</h3>
-                      <span className="text-[10px] bg-purple-900/30 text-purple-300 px-1.5 py-0.5 rounded border border-purple-900/50 font-bold">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-center mb-1 gap-2">
+                      <h3 className="font-bold text-[var(--glass-text-primary)] text-sm truncate">{item.name}</h3>
+                      <span className="text-[10px] glass-badge px-1.5 py-0.5 whitespace-nowrap">
                         Lvl {item.level}
                       </span>
                     </div>
                     
-                    <div className="text-xs text-gray-300 mb-1">
+                    <div className="text-xs text-[var(--glass-text-secondary)] mb-1 font-medium">
                       {item.stats}
                     </div>
                     
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="text-gray-500 italic truncate max-w-[120px]" title={item.obtain}>
-                        {item.obtain}
+                    <div className="flex justify-between items-center text-xs mt-2">
+                      <span className="text-[var(--glass-text-muted)] italic truncate max-w-[120px]" title={item.obtain}>
+                        📍 {item.obtain}
                       </span>
                       {item.imbueSlots > 0 && (
-                        <span className="text-amber-400 flex items-center gap-0.5" title={`${item.imbueSlots} Slot(s)`}>
-                          {Array(item.imbueSlots).fill("○").join("")}
-                        </span>
+                        <div className="flex gap-0.5" title={`${item.imbueSlots} Slot(s) de Imbuement`}>
+                          {Array(item.imbueSlots).fill(0).map((_, idx) => (
+                            <span key={idx} className="w-2 h-2 rounded-full bg-[var(--glass-rubi-primary)] shadow-[0_0_5px_var(--glass-rubi-primary)]"></span>
+                          ))}
+                        </div>
                       )}
                     </div>
                   </div>
