@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 import { creaturesBySlug, creaturesDb } from "@/data/db/creatures";
 import MonsterImage from "@/app/components/MonsterImage";
 import LootImage from "@/app/components/LootImage";
@@ -202,7 +203,9 @@ export default async function CreatureDetailPage({ params }: { params: Promise<{
 
         {/* Back Button */}
         <div className="flex justify-center">
-          <BackButton />
+          <Suspense fallback={<div className="text-xs text-[var(--glass-text-muted)]">Carregando…</div>}>
+            <BackButton />
+          </Suspense>
         </div>
       </div>
     </div>
