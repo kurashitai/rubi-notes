@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LootImage from "@/app/components/LootImage";
+import { BreadcrumbWithHome } from "@/components/ui/breadcrumb";
 
 const BASE_WIKI_URL = "https://wiki.rubinot.com";
 
@@ -57,12 +58,15 @@ export default function WeaponsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Breadcrumb */}
+      <BreadcrumbWithHome items={[{ label: "Armas" }]} />
+
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+      <div className="mb-8 mt-6">
+        <h1 className="text-3xl font-bold mb-2 flex items-center gap-3 bg-gradient-to-r from-[var(--glass-rubi-primary)] to-[var(--glass-accent-glow)] bg-clip-text text-transparent">
           <span>⚔️</span> Armas (Club)
         </h1>
-        <p className="text-gray-400">
+        <p className="text-[var(--glass-text-secondary)]">
           Progressão recomendada de armas para Knight Club.
         </p>
       </div>
@@ -71,13 +75,13 @@ export default function WeaponsPage() {
         
         {/* Physical Weapons */}
         <section>
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-300">
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-[var(--glass-text-primary)]">
             <span>🔨</span> Dano Físico
           </h2>
           <div className="space-y-3">
             {physical.map((weapon, i) => (
-              <div key={i} className="card-glow bg-[#1e1e2e] p-3 rounded-lg border border-gray-800 flex items-center gap-4">
-                <div className="w-12 h-12 bg-black/40 rounded flex items-center justify-center shrink-0 border border-gray-700">
+              <div key={i} className="glass-card p-3 flex items-center gap-4 hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 bg-[var(--glass-bg-hover)] rounded-lg flex items-center justify-center shrink-0 border border-[var(--glass-border)]">
                   <LootImage 
                     src={`${BASE_WIKI_URL}/items/rubinot/${weapon.name.toLowerCase().replace(/ /g, "-").replace(/\./g, "")}.gif`} 
                     alt={weapon.name}
@@ -86,15 +90,15 @@ export default function WeaponsPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-white text-sm">{weapon.name}</h3>
-                    <span className="text-xs bg-[#14141f] px-2 py-0.5 rounded text-gray-400">Lvl {weapon.level}</span>
+                    <h3 className="font-bold text-[var(--glass-text-primary)] text-sm">{weapon.name}</h3>
+                    <span className="text-xs glass-badge px-2 py-0.5">Lvl {weapon.level}</span>
                   </div>
-                  <div className="flex gap-3 text-xs text-gray-400 mt-1">
-                    <span>Atk: <span className="text-gray-200">{weapon.atk}</span></span>
-                    <span>Def: <span className="text-gray-200">{weapon.def}</span></span>
-                    <span>Slots: <span className="text-purple-400">{weapon.slots}</span></span>
+                  <div className="flex gap-3 text-xs text-[var(--glass-text-muted)] mt-1">
+                    <span>Atk: <span className="text-[var(--glass-text-secondary)]">{weapon.atk}</span></span>
+                    <span>Def: <span className="text-[var(--glass-text-secondary)]">{weapon.def}</span></span>
+                    <span>Slots: <span className="text-[var(--glass-rubi-primary)]">{weapon.slots}</span></span>
                   </div>
-                  <div className="text-xs text-gray-500 mt-1 italic">
+                  <div className="text-xs text-[var(--glass-text-muted)] mt-1 italic opacity-80">
                     Obter: {weapon.obtain}
                   </div>
                 </div>
@@ -105,13 +109,19 @@ export default function WeaponsPage() {
 
         {/* Elemental Weapons */}
         <section>
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400">
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-[var(--glass-accent-glow)]">
             <span>⚡</span> Elementais (Mid/Late Game)
           </h2>
           <div className="space-y-3">
             {elemental.map((weapon, i) => (
-              <div key={i} className="card-glow bg-[#1e1e2e] p-3 rounded-lg border border-purple-900/30 flex items-center gap-4">
-                <div className="w-12 h-12 bg-black/40 rounded flex items-center justify-center shrink-0 border border-purple-900/50">
+              <div key={i} className={`glass-card p-3 flex items-center gap-4 hover:scale-[1.02] transition-transform border-l-4 ${
+                weapon.element === "Ice" ? "border-l-cyan-500" :
+                weapon.element === "Fire" ? "border-l-red-500" :
+                weapon.element === "Energy" ? "border-l-purple-500" :
+                weapon.element === "Death" ? "border-l-gray-500" :
+                "border-l-[var(--glass-border)]"
+              }`}>
+                <div className="w-12 h-12 bg-[var(--glass-bg-hover)] rounded-lg flex items-center justify-center shrink-0 border border-[var(--glass-border)]">
                    <LootImage 
                     src={`${BASE_WIKI_URL}/items/rubinot/${weapon.name.toLowerCase().replace(/ /g, "-").replace(/\./g, "")}.gif`} 
                     alt={weapon.name}
@@ -120,26 +130,26 @@ export default function WeaponsPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-white text-sm">{weapon.name}</h3>
-                    <span className="text-xs bg-[#14141f] px-2 py-0.5 rounded text-gray-400">Lvl {weapon.level}</span>
+                    <h3 className="font-bold text-[var(--glass-text-primary)] text-sm">{weapon.name}</h3>
+                    <span className="text-xs glass-badge px-2 py-0.5">Lvl {weapon.level}</span>
                   </div>
-                  <div className="flex gap-3 text-xs text-gray-400 mt-1">
-                    <span>Atk: <span className="text-gray-200">{weapon.atk}</span></span>
-                    <span className={`px-1.5 rounded bg-black/30 border ${
-                      weapon.element === "Ice" ? "border-cyan-500 text-cyan-400" :
-                      weapon.element === "Fire" ? "border-red-500 text-red-400" :
-                      weapon.element === "Energy" ? "border-purple-500 text-purple-400" :
-                      weapon.element === "Death" ? "border-gray-500 text-gray-300" :
-                      "border-gray-700"
+                  <div className="flex gap-3 text-xs text-[var(--glass-text-muted)] mt-1">
+                    <span>Atk: <span className="text-[var(--glass-text-secondary)]">{weapon.atk}</span></span>
+                    <span className={`px-1.5 rounded text-[10px] uppercase font-bold tracking-wider ${
+                      weapon.element === "Ice" ? "bg-cyan-500/20 text-cyan-300" :
+                      weapon.element === "Fire" ? "bg-red-500/20 text-red-300" :
+                      weapon.element === "Energy" ? "bg-purple-500/20 text-purple-300" :
+                      weapon.element === "Death" ? "bg-gray-500/20 text-gray-300" :
+                      "bg-gray-700"
                     }`}>
                       {weapon.element}
                     </span>
-                    <span>Slots: <span className="text-purple-400">{weapon.slots}</span></span>
+                    <span>Slots: <span className="text-[var(--glass-rubi-primary)]">{weapon.slots}</span></span>
                   </div>
-                   <div className="text-xs text-gray-300 mt-1 font-mono">
+                   <div className="text-xs text-[var(--glass-text-secondary)] mt-1 font-mono">
                     {weapon.elementDmg}
                   </div>
-                  <div className="text-xs text-gray-500 mt-1 italic">
+                  <div className="text-xs text-[var(--glass-text-muted)] mt-1 italic opacity-80">
                     Obter: {weapon.obtain}
                   </div>
                 </div>

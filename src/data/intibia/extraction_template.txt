@@ -1,0 +1,33 @@
+# TEMPLATE PARA EXTRAÇÃO DE DADOS DE HUNT
+#
+# Para cada hunt, usar o seguinte JavaScript no Browser:
+
+(() => {
+  const url = window.location.href;
+  const [id, slug] = url.split('/hunts/')[1].split('/');
+
+  const data = {
+    url, id, slug,
+    title: document.querySelector('h1')?.textContent?.trim() || '',
+    vocation: document.querySelector('h2')?.textContent?.replace(/^[^a-zA-Z]/, '').replace(/\s*•.*/, '').trim() || '',
+    levelRange: { min: 0, max: 0 },
+    xpPerHour: { min: '', max: '' },
+    xpPerHour150: { min: '', max: '' },
+    profitPerHour: { min: '', max: '' },
+    video: '',
+    creatures: [],
+    bestLoots: [],
+    strategy: '',
+    location: '',
+    howToGetThere: '',
+    supplies: [],
+    requirements: '',
+    images: [],
+    mapCoordinates: ''
+  };
+
+  // Extrair todos os dados - ver página para detalhes
+  // [DADOS SERÃO PREENCHIDOS MANUALMENTE OU VIA SCRIPT]
+
+  return data;
+})()

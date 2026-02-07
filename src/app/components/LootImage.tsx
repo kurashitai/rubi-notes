@@ -26,7 +26,9 @@ export default function LootImage({ src, alt, className }: LootImageProps) {
     // 3. TibiaWiki BR
     `https://www.tibiawiki.com.br/images/${tibiaWikiName}.gif`,
     // 4. TibiaWiki Fandom (PNG fallback)
-    `https://tibia.fandom.com/wiki/Special:FilePath/${tibiaWikiName}.png`
+    `https://tibia.fandom.com/wiki/Special:FilePath/${tibiaWikiName}.png`,
+    // 5. Placeholder local
+    "/logo.svg"
   ];
 
   // Inicializa com o primeiro src apenas no client para evitar hydration mismatch
@@ -39,9 +41,6 @@ export default function LootImage({ src, alt, className }: LootImageProps) {
       const nextAttempt = attempt + 1;
       setAttempt(nextAttempt);
       setCurrentSrc(fallbacks[nextAttempt]);
-    } else {
-      // Se falhar tudo, esconde
-      setCurrentSrc(""); 
     }
   };
 

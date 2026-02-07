@@ -12,14 +12,10 @@ export default function MonsterImage({ src, alt, className }: MonsterImageProps)
   const [currentSrc, setCurrentSrc] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
 
-  const tibiaWikiName = alt.trim().replace(/ /g, "_");
-
+  // Fallbacks: src fornecido → /logo.svg
   const fallbacks = [
-    src,
-    `https://tibia.fandom.com/wiki/Special:FilePath/${tibiaWikiName}.gif`,
-    `https://www.tibiawiki.com.br/images/${tibiaWikiName}.gif`,
-    `https://tibia.fandom.com/wiki/Special:FilePath/${tibiaWikiName}.png`,
-    "/images/placeholder-monster.png"
+    src || "/logo.svg",  // Se src for vazio, usar logo diretamente
+    "/logo.svg"
   ];
 
   if (currentSrc === null && attempt === 0) {

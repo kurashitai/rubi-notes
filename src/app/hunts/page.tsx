@@ -3,9 +3,8 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { huntsDatabase, HuntData } from "@/data/hunts";
-import { useFavorites } from "@/hooks/useFavorites";
-
-const BASE_WIKI_URL = "https://wiki.rubinot.com";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { useFavorites, FavoriteButton, FavoritesFilter } from "@/hooks/useFavorites";
 
 const parseValue = (val: string) => {
   if (!val) return 0;
@@ -16,214 +15,291 @@ const parseValue = (val: string) => {
 };
 
 const calculateScore = (hunt: HuntData) => {
-  const xpScore = parseValue(hunt.rawExp) / 10000; 
+  const xpScore = parseValue(hunt.rawExp) / 10000;
   const profitScore = hunt.baseProfit > 0 ? hunt.baseProfit * 2 : 0;
   return xpScore + profitScore;
+};
+
+const getTierColor = (tier: string) => {
+  switch (tier) {
+    case "S": return "bg-gradient-to-br from-amber-500/20 to-amber-600/10 text-amber-400 border-amber-500/30";
+    case "A": return "bg-gradient-to-br from-blue-500/20 to-blue-600/10 text-blue-400 border-blue-500/30";
+    case "B": return "bg-gradient-to-br from-green-500/20 to-green-600/10 text-green-400 border-green-500/30";
+    case "C": return "bg-gradient-to-br from-gray-500/20 to-gray-600/10 text-gray-400 border-gray-500/30";
+    default: return "bg-gradient-to-br from-gray-500/20 to-gray-600/10 text-gray-400 border-gray-500/30";
+  }
 };
 
 export default function HuntsPage() {
   const [filterLevel, setFilterLevel] = useState("all");
   const [sortBy, setSortBy] = useState<"tier" | "exp" | "profit" | "score">("tier");
-  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-  
-  const { favorites, toggleFavorite, isFavorite, isLoaded } = useFavorites("favoriteHunts");
+  const [search, setSearch] = useState("");
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const allHunts = Object.values(huntsDatabase);
 
   const filteredHunts = useMemo(() => {
     let result = [...allHunts];
 
-    if (showFavoritesOnly) {
-      result = result.filter(h => favorites.includes(h.slug));
+    // Filter by search
+    if (search) {
+      const q = search.toLowerCase();
+      result = result.filter((h) =>
+        h.name.toLowerCase().includes(q) ||
+        h.location.toLowerCase().includes(q) ||
+        h.weakness.toLowerCase().includes(q)
+      );
     }
 
+    // Filter by level
     if (filterLevel !== "all") {
       const minLevel = parseInt(filterLevel.split("-")[0]);
       result = result.filter((h) => {
-         const huntMin = parseInt(h.levelRange.split("-")[0]);
-         return huntMin >= minLevel;
+        const huntMin = parseInt(h.levelRange.split("-")[0]);
+        return huntMin >= minLevel;
       });
     }
 
+    // Filter by favorites
+    if (showOnlyFavorites) {
+      result = result.filter((h) => isFavorite(h.slug, "hunt"));
+    }
+
+    // Sort
     result.sort((a, b) => {
       if (sortBy === "exp") return parseValue(b.rawExp) - parseValue(a.rawExp);
       if (sortBy === "profit") return b.baseProfit - a.baseProfit;
       if (sortBy === "score") return calculateScore(b) - calculateScore(a);
-      
+
       const tiers = { S: 4, A: 3, B: 2, C: 1 };
       return (tiers[b.tier as keyof typeof tiers] || 0) - (tiers[a.tier as keyof typeof tiers] || 0);
     });
 
     return result;
-  }, [allHunts, filterLevel, sortBy, showFavoritesOnly, favorites]);
+  }, [allHunts, filterLevel, sortBy, search, showOnlyFavorites, isFavorite]);
 
-  if (!isLoaded) return <div className="p-8 text-center text-gray-500">Carregando hunts...</div>;
+  const getProfitColor = (profit: number) => {
+    if (profit >= 500) return "text-emerald-400";
+    if (profit >= 200) return "text-green-400";
+    if (profit >= 100) return "text-yellow-400";
+    if (profit > 0) return "text-orange-400";
+    return "text-red-400";
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
-          <span>🗺️</span> Hunts Guide
-        </h1>
-        <p className="text-gray-400">
-          Encontre a hunt perfeita para seu level, foco em XP ou Profit.
-        </p>
-      </div>
+    <div className="min-h-screen bg-[var(--bg-primary)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Breadcrumb */}
+        <Breadcrumb items={[
+          { label: "Home", href: "/" },
+          { label: "Hunts" }
+        ]} />
 
-      <div className="bg-[#1e1e2e] p-4 rounded-xl border border-gray-700/50 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center sticky top-20 z-40 shadow-lg backdrop-blur-md bg-opacity-90">
-        
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-400">Min Level:</span>
-            <select 
-              value={filterLevel}
-              onChange={(e) => setFilterLevel(e.target.value)}
-              className="bg-[#14141f] border border-gray-700 rounded px-3 py-1.5 text-sm text-white focus:border-purple-500 outline-none"
-            >
-              <option value="all">Todos</option>
-              <option value="8-50">8+</option>
-              <option value="50-100">50+</option>
-              <option value="100-200">100+</option>
-              <option value="200-300">200+</option>
-              <option value="300-999">300+</option>
-              <option value="400-999">400+</option>
-            </select>
+        {/* Header */}
+        <div className="mb-8 mt-6">
+          <div className="flex items-center gap-4 mb-2">
+            <span className="text-5xl">🗺️</span>
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[var(--glass-rubi-primary)] to-[var(--glass-accent-glow)] bg-clip-text text-transparent mb-2">
+                Hunts
+              </h1>
+              <p className="text-[var(--glass-text-secondary)] text-lg">
+                Encontre a hunt perfeita para seu level, foco em XP ou Profit.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="glass-card p-5">
+            <div className="text-3xl font-bold bg-gradient-to-r from-[var(--glass-rubi-primary)] to-[var(--glass-rubi-secondary)] bg-clip-text text-transparent">{allHunts.length}</div>
+            <div className="text-sm text-[var(--glass-text-muted)] mt-1">Hunts Disponíveis</div>
+          </div>
+          <div className="glass-card p-5">
+            <div className="text-3xl font-bold bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">
+              {allHunts.filter(h => h.tier === "S").length}
+            </div>
+            <div className="text-sm text-[var(--glass-text-muted)] mt-1">Tier S (Melhores)</div>
+          </div>
+          <div className="glass-card p-5">
+            <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+              {allHunts.filter(h => h.baseProfit >= 200).length}
+            </div>
+            <div className="text-sm text-[var(--glass-text-muted)] mt-1">Muito Profitáveis</div>
+          </div>
+          <div className="glass-card p-5">
+            <div className="text-3xl font-bold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
+              {allHunts.filter(h => parseValue(h.rawExp) >= 4000000).length}
+            </div>
+            <div className="text-sm text-[var(--glass-text-muted)] mt-1">High XP</div>
+          </div>
+        </div>
+
+        {/* Filters */}
+        <div className="glass-panel p-4 mb-6 sticky top-20 z-40 shadow-xl">
+          <div className="flex flex-col md:flex-row gap-4 items-start">
+            {/* Search */}
+            <div className="flex-1 w-full">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Buscar hunt, localização ou fraqueza..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="glass-input w-full pl-11"
+                />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--glass-text-muted)]">🔍</span>
+              </div>
+            </div>
+
+            {/* Level Filter */}
+            <div className="md:w-44 w-full">
+              <select
+                value={filterLevel}
+                onChange={(e) => setFilterLevel(e.target.value)}
+                className="glass-input w-full cursor-pointer"
+              >
+                <option value="all">Todos Níveis</option>
+                <option value="8-50">8+ (Iniciante)</option>
+                <option value="50-100">50+ (Intermediário)</option>
+                <option value="100-200">100+ (Avançado)</option>
+                <option value="200-300">200+ (Expert)</option>
+                <option value="300-999">300+ (Master)</option>
+                <option value="400-999">400+ (Legendary)</option>
+              </select>
+            </div>
+
+            {/* Sort */}
+            <div className="flex gap-2 overflow-x-auto pb-1 md:pb-0 w-full md:w-auto">
+              {[
+                { id: "tier", label: "Tier", icon: "⭐" },
+                { id: "score", label: "Score", icon: "🎯" },
+                { id: "exp", label: "XP", icon: "⚡" },
+                { id: "profit", label: "Profit", icon: "💰" },
+              ].map((opt) => (
+                <button
+                  key={opt.id}
+                  onClick={() => setSortBy(opt.id as any)}
+                  className={`glass-btn whitespace-nowrap flex items-center gap-2 ${
+                    sortBy === opt.id ? "glass-btn-primary" : ""
+                  }`}
+                >
+                  <span>{opt.icon}</span>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <button
-            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm font-bold transition-colors ${
-              showFavoritesOnly ? "bg-amber-500/20 text-amber-400 border border-amber-500/50" : "bg-[#14141f] text-gray-400 hover:text-white border border-gray-700"
-            }`}
-          >
-            <span>★</span> Favoritos ({favorites.length})
-          </button>
+          {/* Favorites Filter */}
+          <div className="mt-4 pt-4 border-t border-[var(--accent-primary)]/10">
+            <FavoritesFilter
+              type="hunt"
+              showOnlyFavorites={showOnlyFavorites}
+              onToggle={() => setShowOnlyFavorites(!showOnlyFavorites)}
+            />
+          </div>
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-1 md:pb-0 w-full md:w-auto">
-           {[
-             { id: "tier", label: "Tier List" },
-             { id: "score", label: "Melhor Custo-Benefício" },
-             { id: "exp", label: "Maior XP" },
-             { id: "profit", label: "Maior Lucro" },
-           ].map((opt) => (
-             <button
-               key={opt.id}
-               onClick={() => setSortBy(opt.id as any)}
-               className={`px-3 py-1.5 rounded text-xs font-bold transition-colors whitespace-nowrap ${
-                 sortBy === opt.id
-                   ? "bg-purple-600 text-white shadow-glow"
-                   : "bg-[#14141f] text-gray-400 hover:text-white"
-               }`}
-             >
-               {opt.label}
-             </button>
-           ))}
-        </div>
-      </div>
+        {/* Hunts Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredHunts.map((hunt, index) => (
+            <Link
+              key={hunt.slug}
+              href={`/hunts/${hunt.slug}`}
+              className="group relative glass-card overflow-hidden"
+            >
+              {/* Favorite Button */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavorite(hunt.slug, "hunt", hunt.name);
+                }}
+                className="absolute top-4 right-4 z-10 w-10 h-10 bg-[var(--bg-primary)]/80 backdrop-blur-md rounded-full flex items-center justify-center border border-[var(--glass-border)] hover:border-[var(--glass-rubi-primary)]/50 transition-all hover:scale-110"
+              >
+                <FavoriteButton id={hunt.slug} type="hunt" name={hunt.name} />
+              </button>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredHunts.map((hunt) => (
-          <div key={hunt.slug} className="group relative">
-            <Link href={`/hunts/${hunt.slug}`} className="block h-full">
-              <div className={`card-glow bg-[#1e1e2e] h-full flex flex-col relative overflow-hidden group-hover:border-purple-500/50 transition-all ${
-                isFavorite(hunt.slug) ? "border-amber-500/30 shadow-amber-900/10" : ""
-              }`}>
-                
-                <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                   <img 
-                      src={`${BASE_WIKI_URL}/monsters/global/${hunt.monsters[0]?.name.toLowerCase().replace(/ /g, "-")}.gif`}
-                      alt="bg"
-                      className="w-48 h-48 object-contain grayscale"
-                      onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-                   />
-                </div>
-
-                <div className="p-5 border-b border-gray-700/50 flex justify-between items-start">
-                  <div className="pr-8"> 
-                    <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
-                      {hunt.name}
-                    </h3>
-                    <div className="flex items-center gap-2 mt-1">
-                       <span className="text-xs text-gray-400 bg-black/30 px-2 py-0.5 rounded">
-                         Lvl {hunt.levelRange}
-                       </span>
-                       <span className="text-xs text-gray-500 flex items-center gap-1">
-                         📍 {hunt.location}
-                       </span>
-                    </div>
-                  </div>
-                  
-                  <span className={`px-2 py-1 rounded text-xs font-bold shrink-0 ${
-                    hunt.tier === "S" ? "tier-s" : 
-                    hunt.tier === "A" ? "tier-a" : 
-                    hunt.tier === "B" ? "tier-b" : "bg-gray-700 text-gray-300"
-                  }`}>
-                    {hunt.tier}
+              {/* Rank Badge */}
+              {index < 3 && (
+                <div className="absolute top-4 left-4 z-10">
+                  <span className="text-2xl">
+                    {index === 0 ? "🥇" : index === 1 ? "🥈" : "🥉"}
                   </span>
                 </div>
+              )}
 
-                <div className="absolute top-4 right-14 opacity-90 group-hover:scale-110 transition-transform duration-500">
-                    <img 
-                      src={`${BASE_WIKI_URL}/monsters/global/${hunt.monsters[0]?.name.toLowerCase().replace(/ /g, "-")}.gif`}
-                      alt={hunt.monsters[0]?.name}
-                      className="w-12 h-12 object-contain drop-shadow-md"
-                      onError={(e) => (e.target as HTMLImageElement).src = '/images/placeholder-monster.png'}
-                   />
-                </div>
-
-                <div className="p-5 flex-1 space-y-3">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-500">XP/h</span>
-                    <span className="text-green-400 font-mono font-bold">{hunt.rawExp}</span>
+              {/* Content */}
+              <div className="p-5">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-4 mt-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-[var(--glass-text-primary)] group-hover:text-[var(--glass-rubi-primary)] transition-colors mb-1">
+                      {hunt.name}
+                    </h3>
+                    <p className="text-sm text-[var(--glass-text-muted)]">{hunt.location}</p>
                   </div>
-                  
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-500">Profit/h</span>
-                    <span className={`font-mono font-bold ${hunt.baseProfit >= 0 ? 'text-amber-400' : 'text-red-400'}`}>
-                      {hunt.baseProfit > 0 ? `${hunt.baseProfit}k` : `${hunt.baseProfit}k`}
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-500">Fraqueza</span>
-                    <span className="text-red-400 text-xs px-2 py-0.5 bg-red-900/10 border border-red-900/30 rounded">
-                      {hunt.weakness}
-                    </span>
+                  <div className={`glass-badge ${getTierColor(hunt.tier)}`}>
+                    {hunt.tier}
                   </div>
                 </div>
 
+                {/* Stats */}
+                <div className="space-y-3">
+                  {/* Level */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-[var(--glass-text-muted)]">Nível</span>
+                    <span className="text-sm font-bold text-[var(--glass-text-primary)]">{hunt.levelRange}</span>
+                  </div>
+
+                  {/* XP */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-[var(--glass-text-muted)]">XP/Hora</span>
+                    <span className="text-sm font-bold text-[var(--glass-rubi-primary)]">{hunt.rawExp}</span>
+                  </div>
+
+                  {/* Profit */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-[var(--glass-text-muted)]">Profit/Hora</span>
+                    <span className={`text-sm font-bold ${getProfitColor(hunt.baseProfit)}`}>
+                      {hunt.baseProfit > 0 ? `${hunt.baseProfit.toLocaleString()}k` : "---"}
+                    </span>
+                  </div>
+
+                  {/* Weakness */}
+                  <div className="pt-3 border-t border-[var(--glass-border)]">
+                    <div className="text-xs text-[var(--glass-text-muted)] mb-1">Fraqueza</div>
+                    <div className="text-sm font-medium text-[var(--glass-text-primary)]">{hunt.weakness}</div>
+                  </div>
+                </div>
               </div>
-            </Link>
-            
-            {/* Botão de Favorito (Fora do Link para não navegar ao clicar) */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleFavorite(hunt.slug);
-              }}
-              className={`absolute top-4 right-14 z-20 p-1.5 rounded-full transition-all hover:scale-110 ${
-                isFavorite(hunt.slug) 
-                  ? "text-amber-400 bg-amber-900/20" 
-                  : "text-gray-600 hover:text-amber-400 bg-black/20"
-              }`}
-              style={{ right: '4rem' }} // Ajuste de posição
-              title={isFavorite(hunt.slug) ? "Remover Favorito" : "Favoritar"}
-            >
-              <span className="text-xl leading-none">★</span>
-            </button>
-          </div>
-        ))}
-      </div>
 
-      {filteredHunts.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
-          {showFavoritesOnly 
-            ? "Você ainda não favoritou nenhuma hunt." 
-            : "Nenhuma hunt encontrada com esses filtros."}
+              {/* Hover Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--glass-rubi-primary)]/0 to-[var(--glass-rubi-primary)]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            </Link>
+          ))}
         </div>
-      )}
+
+        {/* Empty State */}
+        {filteredHunts.length === 0 && (
+          <div className="text-center py-16 glass-card">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="text-2xl font-bold text-[var(--glass-text-primary)] mb-2">
+              Nenhuma hunt encontrada
+            </h3>
+            <p className="text-[var(--glass-text-secondary)]">
+              Tente ajustar os filtros de busca ou nível.
+            </p>
+          </div>
+        )}
+
+        {/* Footer Stats */}
+        <div className="mt-12 text-center text-sm text-[var(--glass-text-muted)]">
+          <p>Mostrando <span className="font-bold text-[var(--glass-text-primary)]">{filteredHunts.length}</span> de {allHunts.length} hunts</p>
+        </div>
+      </div>
     </div>
   );
 }

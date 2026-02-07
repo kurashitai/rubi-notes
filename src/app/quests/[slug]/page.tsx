@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { questsDatabase } from "@/data/quests";
+import { BreadcrumbWithHome } from "@/components/ui/breadcrumb";
 
 export default async function QuestDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -12,12 +13,16 @@ export default async function QuestDetailPage({ params }: { params: Promise<{ sl
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Breadcrumb */}
+      <BreadcrumbWithHome
+        items={[
+          { label: "Quests", href: "/quests" },
+          { label: quest.name }
+        ]}
+      />
+
       {/* Header */}
       <div className="mb-8">
-        <Link href="/quests" className="text-purple-400 hover:text-purple-300 mb-4 inline-block">
-          ← Voltar para Quests
-        </Link>
-        
         <div className="flex items-center gap-4 mb-2">
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             {quest.name}

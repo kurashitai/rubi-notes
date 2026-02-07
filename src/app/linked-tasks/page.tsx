@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { linkedTasksDatabase, LinkedTask } from "@/data/linked-tasks";
 import { roomRewards } from "@/data/room-rewards";
+import { BreadcrumbWithHome } from "@/components/ui/breadcrumb";
 
 // Definindo as abas (Salas)
 const rooms: { id: LinkedTask["room"]; label: string; icon: string }[] = [
@@ -56,6 +57,9 @@ export default function LinkedTasksPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Breadcrumb */}
+      <BreadcrumbWithHome items={[{ label: "Linked Tasks" }]} />
+
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">

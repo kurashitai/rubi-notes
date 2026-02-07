@@ -1,0 +1,11 @@
+=== PÁGINA 1 ===
+URL: https://intibia.com/pt/hunts?page=1
+
+TAREFA:
+1. Navegar no browser para a URL acima
+2. Extrair URLs das hunts (até 7)
+3. Para cada hunt:
+   - Navegar até a URL
+   - Extrair TODOS os dados listados acima
+4. Salvar dados em formato TypeScript
+
