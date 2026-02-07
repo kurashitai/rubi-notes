@@ -283,7 +283,7 @@ export default function BestiaryPage() {
             return (
               <Link
                 key={monster.slug}
-                href={`/creatures/${monster.slug}?from=bestiary`}
+                href={`/bestiary/${monster.slug}`}
                 className="glass-card p-5 group hover:scale-[1.02] transition-all duration-300 relative overflow-hidden"
               >
                 {/* Header */}
